@@ -31,7 +31,7 @@ jobs:
           ssh-keyscan -H ${{ vars.SERVER_IP }} >> ~/.ssh/known_hosts
       - name: Deploy builds to server
         run: |
-          rsync -vrm dist/* ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }}:${{ vars.SERVER_BUILD_PATH }}
+          rsync -vrm dist/* ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }}:${{ vars.SERVER_WORKDIR }}/${{ vars.SERVER_BUILD_PATH }}
       - name: Restart server
         run: |
-          ssh ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }} "sudo docker-compose restart"
+          ssh ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }}:${{ vars.SERVER_WORKDIR }} "sudo docker-compose restart"
