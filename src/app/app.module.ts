@@ -23,7 +23,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
-import {TuiAppearanceModule, TuiCardModule, TuiSurfaceModule} from '@taiga-ui/experimental'
+import {
+  TuiAppearanceModule,
+  TuiCardModule,
+  TuiIconModule,
+  tuiIconResolverProvider,
+  TuiSurfaceModule
+} from '@taiga-ui/experimental'
 
 @NgModule({
   declarations: [
@@ -55,10 +61,14 @@ import {TuiAppearanceModule, TuiCardModule, TuiSurfaceModule} from '@taiga-ui/ex
     TuiSurfaceModule,
     TuiLinkModule,
     TuiAppearanceModule,
-    TuiInputPasswordModule
+    TuiInputPasswordModule,
+    TuiIconModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
+    tuiIconResolverProvider(icon =>
+      icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
+    ),
   ],
   bootstrap: [AppComponent]
 })
