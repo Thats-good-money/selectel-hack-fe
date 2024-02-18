@@ -1,0 +1,26 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+* {
+  --tui-primary: #C64138;
+  --tui-primary-hover: #A22418;
+  --tui-accent: #fff;
+  --tui-link: var(--tui-primary);
+  --tui-link-hover: var(--tui-primary-hover);
+}
+
+body {
+  background-color: #F0F1F3 !important;
+}
+
+[tuiWrapper][data-appearance='main-theme'] {
+  background: var(--tui-primary);
+  color: var(--tui-accent);
+
+  .wrapper-hover({
+    background: var(--tui-primary-hover);
+  });
+
+  .wrapper-disabled({
+    background: #7E3930;
+  });
+}

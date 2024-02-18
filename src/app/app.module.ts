@@ -23,7 +23,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiFieldErrorPipeModule, TuiInputModule } from "@taiga-ui/kit";
-import { TuiCardModule, TuiSurfaceModule } from '@taiga-ui/experimental'
+import {TuiAppearanceModule, TuiCardModule, TuiSurfaceModule} from '@taiga-ui/experimental'
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { TuiCardModule, TuiSurfaceModule } from '@taiga-ui/experimental'
     TuiButtonModule,
     TuiCardModule,
     TuiSurfaceModule,
-    TuiLinkModule
+    TuiLinkModule,
+    TuiAppearanceModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
