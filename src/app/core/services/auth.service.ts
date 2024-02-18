@@ -49,14 +49,20 @@ export class AuthService {
 
   /**
    * Совершить вход.
-   * 
+   *
    * @param credentials данные пользователя для входа
    * @returns `Observable` с объектов ответа
    */
   public login(credentials: UserCredentials): Observable<Object> {
-    const url = `${environment.apiUrl}/auth/login`;
+    const url = `${environment.apiUrl}/login`;
 
-    const loginObservable = this._http.post<LoginOrRegisterResponse>(url, credentials);
+    const loginObservable = this._http.post<LoginOrRegisterResponse>(
+      url,
+      {
+        login: credentials.username,
+        password: credentials.password,
+      }
+    );
 
     return loginObservable.pipe(
       tap(res => {
@@ -71,7 +77,7 @@ export class AuthService {
 
   /**
    * Зарегистрировать нового пользователя
-   * 
+   *
    * @param credentials данные пользователя для регистрации
    * @returns `Observable` с объектов ответа
    */
@@ -136,7 +142,7 @@ export class AuthService {
 
   /**
    * Восстановить сохранённые данные пользователя.
-   * 
+   *
    * @returns данные пользователя или `null`, если они не были сохранены
    */
   private _restoreUser(): User | null {
@@ -150,7 +156,7 @@ export class AuthService {
    */
   private _storeUser(): void {
     const userJSON = JSON.stringify(this._currentUser);
-    
+
     localStorage.setItem(this.USER_STORAGE_KEY, userJSON);
   }
 }
