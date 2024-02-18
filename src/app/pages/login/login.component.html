@@ -1,3 +1,69 @@
-<h1 class="mb-10 text-3xl text-center text-slate-300">Войти в аккаунт</h1>
-<app-user-form class="user-form" [isRegistering]="false"></app-user-form>
-<a class="text-xl text-center text-slate-300 hover:opacity-70" [routerLink]="'/register'">Зарегистрироваться</a>
+<div
+  class="auth-card"
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <form class="form" [formGroup]="loginCredentialsForm">
+    <h3 class="tui-form__header tui-form__header_margin-top_none">Войти в аккаунт</h3>
+    <p class="tui-space_bottom-1">
+      <tui-input
+        formControlName="username"
+        tuiTextfieldSize="l"
+      >
+        Имя пользователя
+        <input
+          tuiTextfield
+          type="text"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="username"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p>
+      <tui-input
+        formControlName="password"
+        tuiTextfieldSize="l"
+      >
+        Пароль
+        <input
+          tuiTextfield
+          type="password"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="password"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p
+      class="tui-space_right-3 tui-space_bottom-3 tui-space_top-10"
+    >
+      <button
+        class="w-full"
+        tuiButton
+        type="button"
+        icon="tuiIconLogIn"
+        (click)="processAuth()"
+      >
+        Войти
+      </button>
+    </p>
+    <p class="w-full text-center">
+      <a
+        class="m-auto"
+        routerLink="/register"
+        tuiLink
+      >
+        Зарегистрировать новый аккаунт
+      </a>
+    </p>
+  </form>
+</div>

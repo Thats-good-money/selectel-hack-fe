@@ -1,3 +1,89 @@
-<h1 class="mb-10 text-3xl text-center text-slate-300">Создать аккаунт</h1>
-<app-user-form class="user-form" [isRegistering]="true"></app-user-form>
-<a class="text-xl text-center text-slate-300 hover:opacity-70" [routerLink]="'/login'">Уже есть аккаунт</a>
+<div
+  class="auth-card"
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <form
+    [formGroup]="registerFormComponent"
+  >
+    <h3 class="tui-form__header tui-form__header_margin-top_none">Зарегистрировать аккаунт</h3>
+    <p class="tui-space_bottom-1">
+      <tui-input
+        formControlName="firstName"
+        tuiTextfieldSize="l"
+      >
+        Имя
+        <input
+          tuiTextfield
+          type="text"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="firstName"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p class="tui-space_bottom-1">
+      <tui-input
+        formControlName="lastName"
+        tuiTextfieldSize="l"
+      >
+        Фамилия
+        <input
+          tuiTextfield
+          type="text"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="lastName"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p>
+      <tui-input
+        formControlName="password"
+        tuiTextfieldSize="l"
+      >
+        Пароль
+        <input
+          tuiTextfield
+          type="password"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="password"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p
+      class="tui-space_right-3 tui-space_bottom-3 tui-space_top-10"
+    >
+      <button
+        class="w-full"
+        tuiButton
+        type="button"
+        icon="tuiIconUser"
+      >
+        Создать аккаунт
+      </button>
+    </p>
+    <p class="w-full text-center">
+      <a
+        class="m-auto"
+        routerLink="/login"
+        tuiLink
+      >
+        Уже есть аккаунт
+      </a>
+    </p>
+  </form>
+</div>
