@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TUI_VALIDATION_ERRORS} from "@taiga-ui/kit";
+import { TuiAlertService } from "@taiga-ui/core";
 
 @Component({
   selector: 'app-login',
@@ -21,11 +22,8 @@ import {TUI_VALIDATION_ERRORS} from "@taiga-ui/kit";
   ]
 })
 export class LoginComponent {
-  @Input() isRegistering: boolean = false;
 
-  public validationError?: string;
-
-  public loginCredentialsForm = new FormGroup({
+  public readonly loginCredentialsForm = new FormGroup({
     username: new FormControl(
       '',
       [
@@ -42,41 +40,41 @@ export class LoginComponent {
     ),
   });
 
-  public username: string = '';
-
-  public password: string = '';
-
-  public get sumbitText(): string {
-    return this.isRegistering ? 'Зарегистрироваться' : 'Войти';
-  }
-
   constructor(
     private _authService: AuthService,
     private _router: Router,
+    private _alerts: TuiAlertService,
   ) { }
 
   public processAuth(): void {
     const credentials = {
-      username: this.username,
-      password: this.password
+      username: this.loginCredentialsForm.controls.username.value ?? '',
+      password: this.loginCredentialsForm.controls.password.value ?? '',
     };
 
-    let authObservable: Observable<Object>;
+    this._authService.login(credentials)
+      .subscribe({
+        complete: () => this._router.navigate(['/']),
+        error: (err: HttpErrorResponse) => {
+          this._alerts
+            .open(
+              this._getErrorMessageByResponseCode(err.status),
+              {
+                status: 'error',
+              }
+            )
+            .subscribe();
+        },
+      });
+  }
 
-    if (this.isRegistering) {
-      authObservable = this._authService.register(credentials);
-    } else {
-      authObservable = this._authService.login(credentials);
+  private _getErrorMessageByResponseCode(code: number): string {
+    switch (code) {
+      case 403:
+      case 404:
+        return 'Неверный логин или пароль';
+      default:
+        return 'Неизвестная ошибка'
     }
-
-    authObservable.subscribe({
-      complete: () => this._router.navigate(['/']),
-      error: (err: HttpErrorResponse) => {
-        if (err.status === 401)
-          this.validationError = 'Неверный логин или пароль';
-        else if (err.status === 500)
-          this.validationError = 'Длина не менее 3-х символов';
-      },
-    })
   }
 }

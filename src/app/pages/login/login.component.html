@@ -25,17 +25,12 @@
       </tui-error>
     </p>
     <p>
-      <tui-input
+      <tui-input-password
         formControlName="password"
         tuiTextfieldSize="l"
       >
         Пароль
-        <input
-          tuiTextfield
-          type="password"
-          required
-        />
-      </tui-input>
+      </tui-input-password>
       <tui-error
         class=""
         formControlName="password"
@@ -52,6 +47,7 @@
         appearance="main-theme"
         type="button"
         icon="tuiIconLogIn"
+        [disabled]="!loginCredentialsForm.valid"
         (click)="processAuth()"
       >
         Войти

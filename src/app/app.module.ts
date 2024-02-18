@@ -22,7 +22,7 @@ import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiFieldErrorPipeModule, TuiInputModule } from "@taiga-ui/kit";
+import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
 import {TuiAppearanceModule, TuiCardModule, TuiSurfaceModule} from '@taiga-ui/experimental'
 
 @NgModule({
@@ -54,7 +54,8 @@ import {TuiAppearanceModule, TuiCardModule, TuiSurfaceModule} from '@taiga-ui/ex
     TuiCardModule,
     TuiSurfaceModule,
     TuiLinkModule,
-    TuiAppearanceModule
+    TuiAppearanceModule,
+    TuiInputPasswordModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

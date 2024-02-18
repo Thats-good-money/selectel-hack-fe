@@ -1,6 +1,6 @@
 {
-  "/lab4/api": {
-    "target": "http://127.0.0.1:8000",
+  "/api": {
+    "target": "http://84.201.174.100:8181",
     "secure": false
   }
 }
