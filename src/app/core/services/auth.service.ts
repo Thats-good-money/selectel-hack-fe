@@ -35,7 +35,7 @@ export class AuthService {
 
     let headers = new HttpHeaders();
     if (user?.token != undefined)
-      headers = headers.set('Authorization', 'Bearer ' + user?.token);
+      headers = headers.set('Authorization', user?.token);
 
     return headers;
   }
@@ -114,7 +114,7 @@ export class AuthService {
   public authViaToken(): Observable<boolean> {
     const user = this._restoreUser();
 
-    if (user == undefined || user.token == undefined) {
+    if (user == undefined || user.token == undefined || user.userId ) {
       return of(false);
     }
 
