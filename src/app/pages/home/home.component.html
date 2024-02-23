@@ -1,29 +1,10 @@
 <div class="flex flex-col gap-2 point-panel md:gap-10 sm:flex-row">
-  <app-points-plot
-    class="text-slate-400"
-    [points]="points"
-    [rValue]="currentPoint.r"
-    (updateCoords)="setCoordsFromPlot($event)"
-  >
-  </app-points-plot>
   <form
     class="form"
     (submit)="onPointFormSubmit($event)"
   >
     <div class="form__field tui-space_bottom-6">
       <label class="field__label">X:</label>
-      <!--      <div class="field__checkboxes">-->
-      <!--        <label class="checkboxes__label" *ngFor="let x of xValues">-->
-      <!--          {{ x }}-->
-      <!--          <input-->
-      <!--            class="checkboxes__checkbox"-->
-      <!--            type="checkbox"-->
-      <!--            [value]="x"-->
-      <!--            [checked]="currentPoint.x == x"-->
-      <!--            (click)="onCheckboxSelected($event, 'x')"-->
-      <!--          />-->
-      <!--        </label>-->
-      <!--      </div>-->
 
       <form class="group" style="width: 100%" [formGroup]="testForm">
         <div tuiGroup class="group" [collapsed]="true">
@@ -187,10 +168,10 @@
   (click)="onLogout()">Выйти
 </button>
 
-<!--<button-->
-<!--  tuiButton-->
-<!--  type="button"-->
-<!--  (click)="logValue()">-->
-<!--  Debug-->
-<!--</button>-->
+<button
+  tuiButton
+  type="button"
+  (click)="goToDonations()">
+  Debug
+</button>
 

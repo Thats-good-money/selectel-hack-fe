@@ -5,7 +5,7 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
   TuiButtonModule,
-  TuiGroupModule, TuiErrorModule
+  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -22,8 +22,17 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TuiCheckboxBlockModule, TuiCheckboxModule, TuiFieldErrorPipeModule, TuiInputModule} from "@taiga-ui/kit";
+import {
+  TuiCheckboxBlockModule,
+  TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
+  TuiFieldErrorPipeModule, TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
+  TuiInputModule,
+  TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
+} from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
+import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
+import { DonationsComponent } from './pages/donations/donations.component';
+import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
 
 @NgModule({
   declarations: [
@@ -34,6 +43,8 @@ import {TuiTableModule} from "@taiga-ui/addon-table";
     PointsPlotComponent,
     PointsTableComponent,
     NavbarComponent,
+    DonationFormComponent,
+    DonationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +64,19 @@ import {TuiTableModule} from "@taiga-ui/addon-table";
     TuiCheckboxModule,
     TuiTableModule,
     TuiFieldErrorPipeModule,
-    TuiErrorModule
+    TuiErrorModule,
+    TuiRadioBlockModule,
+    TuiTextfieldControllerModule,
+    TuiInputDateModule,
+    TuiUnfinishedValidatorModule,
+    TuiDropdownModule,
+    TuiActiveZoneModule,
+    TuiObscuredModule,
+    TuiComboBoxModule,
+    TuiDataListWrapperModule,
+    TuiFilterByInputPipeModule,
+    TuiStringifyContentPipeModule,
+    TuiInputFilesModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

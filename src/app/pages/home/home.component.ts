@@ -54,6 +54,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(this.rForm?.value)
   }
 
+  goToDonations(){
+    this._router.navigate(['/donations'])
+  }
+
 
   /**
    * Точки.
