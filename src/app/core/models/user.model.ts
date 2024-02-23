@@ -3,11 +3,8 @@ import { PointData } from "./point.model";
 /**
  * Пользователь.
  */
-export interface User {
-  email: string;
-  firstName: string;
+export interface User extends UserDTO{
   token?: string;
-  userId: number;
 }
 
 export interface LoginRequest {
@@ -29,7 +26,7 @@ export interface UserDTO {
   firstName: string;
   tag: string | null;
   city: string;
-  bloodType: string | null;
+  bloodType: BloodType | null;
 }
 
 export interface RegisterResponse {

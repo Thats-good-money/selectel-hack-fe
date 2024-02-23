@@ -61,10 +61,8 @@ export class AuthService {
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: res.userDto.email,
-          firstName: res.userDto.firstName,
+          ...res.userDto,
           token: res.token,
-          userId: res.userDto.userId,
         };
       }),
     );
@@ -83,10 +81,8 @@ export class AuthService {
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: res.userDto.email,
-          firstName: res.userDto.firstName,
+          ...res.userDto,
           token: res.token,
-          userId: res.userDto.userId,
         };
       }),
     );
