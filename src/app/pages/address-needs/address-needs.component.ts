@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { BloodType } from "@core/models/user.model";
 import { AddressNeeds } from "@core/models/address-needs.model";
-import { Observable, of } from "rxjs";
+import { debounceTime, Observable, of } from "rxjs";
 import { AddressNeedsService } from '@core/services/address-needs.service';
 
 @Component({
@@ -26,7 +26,17 @@ export class AddressNeedsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList();
+    this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
+
+    this.needsFilterForm.valueChanges
+      .pipe(
+        debounceTime(1000),
+      )
+      .subscribe(() => {
+        this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList(
+          this.needsFilterForm.value
+        );
+      });
   }
 
   public checkBloodTypeNeeded(bloodType: BloodType, addressNeeds: AddressNeeds): boolean {
