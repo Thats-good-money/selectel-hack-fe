@@ -5,7 +5,7 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
   TuiButtonModule,
-  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule
+  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule, TuiLinkModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -24,21 +24,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiCarouselModule,
-  TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule,
-  TuiInputModule,
-  TuiInputPasswordModule, TuiIslandModule, TuiPaginationModule,
+
+ TuiIslandModule, TuiPaginationModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
   TuiCheckboxBlockModule,
   TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule, TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
-  TuiInputModule,
+   TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
-import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
 import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
 import { DonationsComponent } from './pages/donations/donations.component';
 import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
