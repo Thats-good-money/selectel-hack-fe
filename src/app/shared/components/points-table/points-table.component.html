@@ -1,18 +1,21 @@
-<table class="points-table">
-    <thead class="points-table__table-header">
-        <th class="table-header__cell">X</th>
-        <th class="table-header__cell">Y</th>
-        <th class="table-header__cell">R</th>
-        <th class="table-header__cell">Попал</th>
-        <th class="table-header__cell">Дата</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let point of points">
-            <td>{{ point.x }}</td>
-            <td>{{ point.y }}</td>
-            <td>{{ point.r }}</td>
-            <td>{{ point.hit ? 'Да' : 'Нет' }}</td>
-            <td>{{ point.created | date }}</td>
-        </tr>
-    </tbody>
+<table class="points-table table" tuiTable>
+  <thead >
+  <tr tuiThGroup>
+    <th tuiTh [resizable]="true">X</th>
+    <th tuiTh [resizable]="true">Y</th>
+    <th tuiTh [resizable]="true">R</th>
+    <th tuiTh [resizable]="true">Попал</th>
+    <th tuiTh [resizable]="true">Дата</th>
+  </tr>
+
+  </thead>
+  <tbody tuiTbody>
+  <tr *ngFor="let point of points" tuiTr>
+    <td tuiTd>{{ point.x }}</td>
+    <td tuiTd>{{ point.y }}</td>
+    <td tuiTd>{{ point.r }}</td>
+    <td tuiTd>{{ point.hit ? 'Да' : 'Нет' }}</td>
+    <td tuiTd>{{ point.created | date }}</td>
+  </tr>
+  </tbody>
 </table>

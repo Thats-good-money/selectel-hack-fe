@@ -1,67 +1,177 @@
 <div class="flex flex-col gap-2 point-panel md:gap-10 sm:flex-row">
-  <app-points-plot
-    class="text-slate-400"
-    [points]="points"
-    [rValue]="currentPoint.r"
-    (updateCoords)="setCoordsFromPlot($event)"
-  >
-  </app-points-plot>
   <form
     class="form"
     (submit)="onPointFormSubmit($event)"
   >
-    <div class="form__field">
+    <div class="form__field tui-space_bottom-6">
       <label class="field__label">X:</label>
-      <div class="field__checkboxes">
-        <label class="checkboxes__label" *ngFor="let x of xValues">
-          {{ x }}
-          <input
-            class="checkboxes__checkbox"
-            type="checkbox"
-            [value]="x"
-            [checked]="currentPoint.x == x"
-            (click)="onCheckboxSelected($event, 'x')"
-          />
-        </label>
-      </div>
+
+      <form class="group" style="width: 100%" [formGroup]="testForm">
+        <div tuiGroup class="group" [collapsed]="true">
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue1"
+            size="l"
+          >
+            -3
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue2"
+            size="l"
+          >
+            -2
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue3"
+            size="l"
+          >
+            -1
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue4"
+            size="l"
+          >
+            0
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue5"
+            size="l"
+          >
+            1
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue6"
+            size="l"
+          >
+            2
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="testValue7"
+            size="l"
+          >
+            3
+          </tui-checkbox-block>
+        </div>
+
+      </form>
     </div>
+
+
     <div class="form__field">
       <label class="field__label">Y:</label>
-      <input class="field__input" type="text" [(ngModel)]="currentPoint.y" [ngModelOptions]="{standalone: true}"/>
+      <form class="b-form" [formGroup]="inputForm" style="width: 100%">
+        <tui-input >
+          Input Y
+          <input tuiTextfield type="text" formControlName="testValue">
+        </tui-input>
+      </form>
     </div>
-    <div class="form__field">
+    <div class="form__field tui-space_top-5">
       <label class="field__label">R:</label>
-      <div class="field__checkboxes">
-        <label class="checkboxes__label" *ngFor="let r of rValues">
-          {{ r }}
-          <input
-            class="checkboxes__checkbox"
-            type="checkbox"
-            [value]="r"
-            [checked]="currentPoint.r == r"
-            (click)="onCheckboxSelected($event, 'r')"
-          />
-        </label>
-      </div>
+      <form class="group" style="width: 100%" [formGroup]="rForm">
+        <div tuiGroup class="group" [collapsed]="true">
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue1"
+            size="l"
+          >
+            -3
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue2"
+            size="l"
+          >
+            -2
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue3"
+            size="l"
+          >
+            -1
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue4"
+            size="l"
+          >
+            0
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue5"
+            size="l"
+          >
+            1
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue6"
+            size="l"
+          >
+            2
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue7"
+            size="l"
+          >
+            3
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue8"
+            size="l"
+          >
+            4
+          </tui-checkbox-block>
+          <tui-checkbox-block
+            contentAlign="right"
+            formControlName="rValue9"
+            size="l"
+          >
+            5
+          </tui-checkbox-block>
+
+        </div>
+
+      </form>
     </div>
-    <input
+    <button
+      tuiButton
       class="form__submit"
       type="submit"
-      value="Отправить"
       [disabled]="!isFormValid"
-    />
+    >Отправить</button>
   </form>
 </div>
 <div class="results">
   <app-points-table
     class="points-table"
     [points]="points"
+
   >
   </app-points-table>
 </div>
-<input
-  class="self-center form__submit"
-  type="submit"
-  value="Выйти"
-  (click)="onLogout()"
-/>
+
+<button
+  tuiButton
+  type="button"
+  class="tui-space_top-3"
+  (click)="onLogout()">Выйти
+</button>
+
+<button
+  tuiButton
+  type="button"
+  (click)="goToDonations()">
+  Debug
+</button>
+
