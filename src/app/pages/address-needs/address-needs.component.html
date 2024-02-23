@@ -1,4 +1,4 @@
-<h3 class="tui-form__header tui-form__header_margin-top_none">Где сдать кровь</h3>
+<h2 class="tui-text_h3 tui-space_bottom-10">Где сдать кровь</h2>
 
 <div
   tuiCardLarge
@@ -43,10 +43,60 @@
   </form>
 </div>
 
-<div
-  tuiCardLarge
-  tuiSurface="elevated"
-  *ngFor="let addressNeed of (addressNeeds$ | async)"
->
-  <p>{{ addressNeed.bloodStation.title }}</p>
+<div class="tui-space_top-5">
+  <div
+    tuiCardLarge
+    tuiSurface="elevated"
+    *ngFor="let addressNeed of (addressNeeds$ | async)"
+  >
+    <h3 class="tui-text_h5">
+      {{ addressNeed.bloodStation.title }}
+    </h3>
+    <p>
+      {{ addressNeed.bloodStation.address }}
+    </p>
+    <div class="grid grid-cols-4 gap-1.5">
+      <tui-island
+        class="text-center border-solid"
+        style="border-width: 1px"
+        *ngFor="let bloodType of bloodTypes"
+        [ngClass]="{
+          'text-red-500 bg-red-100 border-red-500': !checkBloodTypeNeeded(bloodType, addressNeed),
+          'text-green-500 bg-green-100 border-green-500': checkBloodTypeNeeded(bloodType, addressNeed),
+        }"
+      >
+        {{ bloodType }}
+      </tui-island>
+    </div>
+    <div class="flex justify-between">
+      <div class="flex justify-between items-center gap-2">
+        <div
+          class="w-5 h-5 rounded-md border-green-500 border-solid bg-green-100"
+          style="border-width: 1px"
+        >
+        </div>
+        <span>
+          Требуется
+        </span>
+      </div>
+
+      <div class="flex justify-between items-center gap-2">
+        <div
+          class="w-5 h-5 rounded-md border-red-500 border-solid bg-red-100"
+          style="border-width: 1px"
+        >
+        </div>
+        <span>
+          Достаточно
+        </span>
+      </div>
+    </div>
+    <button
+      tuiButton
+      type="button"
+      icon="tuiIconArrowUpRight"
+    >
+      Записаться
+    </button>
+  </div>
 </div>
