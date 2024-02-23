@@ -67,7 +67,7 @@ export class DonationFormComponent implements OnInit{
       this.needCert = value === 'cert1'
     })
 
-    this.citiesService.getCities(environment.citiesEndpoint).subscribe((response: CitiesResponse) => {
+    this.citiesService.getCities(`${environment.externalApiUrl}/cities`).subscribe((response: CitiesResponse) => {
       this.cities = response.results.map(city => city.title)
     })
   }
