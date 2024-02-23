@@ -61,8 +61,8 @@ export class AuthService {
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.email,
-          points: [],
+          email: credentials.email,
+          firstName: '',
           token: res.token,
         };
       }),
@@ -76,14 +76,14 @@ export class AuthService {
    * @returns `Observable` с объектов ответа
    */
   public register(credentials: RegisterRequest): Observable<Object> {
-    const url = `${environment.apiUrl}/auth/registration`;
+    const url = `${environment.apiUrl}/registration`;
     const registerObservable = this._http.post<RegisterResponse>(url, credentials);
 
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.email,
-          points: [],
+          email: credentials.email,
+          firstName: credentials.firstName,
           token: res.token,
         };
       }),

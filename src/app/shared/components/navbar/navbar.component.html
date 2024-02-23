@@ -1,18 +1,16 @@
-<nav class="flex justify-between w-full h-20 p-5 border-b-4 rounded-b-lg bg-gray-100 bg-clip-padding">
-  <a
-    id="main-link"
-    class="self-center text-xl sm:text-4xl tui-text_h1"
-    routerLink="/"
+<nav
+  class="border-b-2 m-auto border-gray-300 flex justify-start h-16 items-center"
+  style="width: 90%"
+>
+  <button
+    tuiIconButton
+    appearance="icon"
+    icon="tuiIconChevronLeft"
+    type="button"
+    (click)="goBack()"
   >
-    <img src="assets/logo.svg"/>
-  </a>
-  <p
-    id="authors"
-    class="self-center break-words text-md sm:text-lg text-cyan-500"
-  >
-    <tui-icon
-      icon="money"
-    />
-    That's good money
-  </p>
+  </button>
+  <h1 class="tui-text_h5">
+    {{ title }}
+  </h1>
 </nav>

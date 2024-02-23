@@ -22,7 +22,7 @@ export class AddressNeedsService {
       this._http.get<Pagination<AddressNeeds>>(url)
         .pipe(
           map(o => keysToCamel(o) as Pagination<AddressNeeds>),
-          map(response => response.results),
+          map(response => [...response.results, ...response.results, ...response.results]),
           map(addressNeeds => {
             return addressNeeds.filter(addressNeed => {
               let result = true;
@@ -40,6 +40,9 @@ export class AddressNeedsService {
               }
               if (filters.city) {
                 result = addressNeed.bloodStation.city.title.includes(filters.city);
+              }
+              if (filters.title) {
+                result = addressNeed.bloodStation.title.includes(filters.title);
               }
 
               return result;
