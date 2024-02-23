@@ -1,26 +1,22 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CitiesService} from "@core/services/cities.service";
+import {StationsService} from "@core/services/stations.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {TuiDay} from "@taiga-ui/cdk";
+import {SimpleCity} from "@core/models/simpleCity.model";
+import {SimpleStation} from "@core/models/simpleStation.model";
+import {environment} from "../../../environments/environment";
+import {CitiesResponse} from "@core/models/city.model";
+import {StationsResponse} from "@core/models/station.model";
 import {finalize, map, Observable, of, Subject, switchMap, timer} from "rxjs";
 import {TuiFileLike} from "@taiga-ui/kit";
 
-import {CitiesService} from "@core/services/cities.service";
-import {CitiesResponse} from "@core/models/city.model";
-import {StationsService} from "@core/services/stations.service";
-import {StationsResponse} from "@core/models/station.model";
-import {SimpleStation} from "@core/models/simpleStation.model";
-import {SimpleCity} from "@core/models/simpleCity.model";
-import {environment} from "../../../environments/environment";
-
 @Component({
-  selector: 'app-donations',
-  templateUrl: './donations.component.html',
-  styleUrls: ['./donations.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-plan-donation',
+  templateUrl: './plan-donation.component.html',
+  styleUrls: ['./plan-donation.component.scss']
 })
-
-export class DonationsComponent implements OnInit{
-
+export class PlanDonationComponent implements OnInit{
   constructor(private citiesService: CitiesService, private stationsService: StationsService) {
 
   }
@@ -66,12 +62,6 @@ export class DonationsComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.certificateForm.get('certificate')?.valueChanges.subscribe(value => {
-      this.needCert = value === 'cert1'
-      this.removeFile()
-    })
-
-
     this.citiesService.getCities(`${environment.externalApiUrl}/cities`).subscribe((response: CitiesResponse) => {
       this.simpleCities = response.results.map(city => city.title)
       this.extendedCities = response.results.map(city => ({name: city.title, id: city.id}))
@@ -85,8 +75,6 @@ export class DonationsComponent implements OnInit{
       this.filterStationsByCity(selectedCity)
       this.stationControl.reset()
     })
-
-
   }
 
   filterStationsByCity(city: string){
@@ -98,53 +86,6 @@ export class DonationsComponent implements OnInit{
   }
 
 
-  needCert = true
-
-  certificateForm = new FormGroup({
-    certificate: new FormControl('cert1')
-  })
-
-  readonly control = new FormControl();
-
-  readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
-  readonly loadingFiles$ = new Subject<TuiFileLike | null>();
-  readonly loadedFiles$ = this.control.valueChanges.pipe(
-    switchMap(file => (file ? this.makeRequest(file) : of(null))),
-  );
-
-
-  onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
-    this.rejectedFiles$.next(file as TuiFileLike);
-  }
-
-  removeFile(): void {
-    this.control.setValue(null);
-  }
-
-  clearRejected(): void {
-    this.removeFile();
-    this.rejectedFiles$.next(null);
-  }
-
-  makeRequest(file: TuiFileLike): Observable<TuiFileLike | null> {
-    this.loadingFiles$.next(file);
-
-    return timer(1000).pipe(
-      map(() => {
-        if (Math.random() > 0.5) {
-          return file;
-        }
-
-        this.rejectedFiles$.next(file);
-
-        return null;
-      }),
-      finalize(() => this.loadingFiles$.next(null)),
-    );
-  }
-
-
-
   submitForm() {
     const submissionData = {
       bloodType: this.bloodTypeForm.value.bloodType,
@@ -153,11 +94,8 @@ export class DonationsComponent implements OnInit{
       place: this.placeForm.value.place,
       city: this.cityControl.value,
       station: this.stationControl.value,
-      certificate: this.certificateForm.value.certificate,
-      file: this.control.value ? this.control.value.name : 'No file selected'
     };
 
     console.log(submissionData);
   }
-
 }

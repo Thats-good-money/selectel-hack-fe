@@ -5,7 +5,13 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
   TuiButtonModule,
-  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule, TuiLinkModule
+  TuiGroupModule,
+  TuiErrorModule,
+  TuiTextfieldControllerModule,
+  TuiDropdownModule,
+  TuiLinkModule,
+  TuiLabelModule,
+  TuiHintModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -23,8 +29,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  TuiAvatarModule,
   TuiCarouselModule,
-  TuiIslandModule, TuiPaginationModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiPaginationModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
@@ -35,7 +42,6 @@ import {
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
-import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
 import { DonationsComponent } from './pages/donations/donations.component';
 import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
 import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
@@ -46,8 +52,8 @@ import {
   tuiIconResolverProvider,
   TuiSurfaceModule
 } from '@taiga-ui/experimental';
-import { AddressNeedsComponent } from './pages/address-needs/address-needs.component'
-
+import { AddressNeedsComponent } from './pages/address-needs/address-needs.component';
+import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
 
 @NgModule({
   declarations: [
@@ -58,9 +64,9 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
     PointsPlotComponent,
     PointsTableComponent,
     NavbarComponent,
-    DonationFormComponent,
     DonationsComponent,
-    AddressNeedsComponent
+    AddressNeedsComponent,
+    PlanDonationComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +109,12 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
     TuiDataListWrapperModule,
     TuiCarouselModule,
     TuiPaginationModule,
-    TuiIslandModule
+    TuiIslandModule,
+    TuiLabelModule,
+    TuiAvatarModule,
+    TuiHintModule,
+    TuiButtonModule,
+    TuiMarkerIconModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
