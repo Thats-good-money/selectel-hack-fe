@@ -21,6 +21,7 @@ import { PointsTableComponent } from './shared/components/points-table/points-ta
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   TuiCheckboxBlockModule,
@@ -30,9 +31,19 @@ import {
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
+import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
 import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
 import { DonationsComponent } from './pages/donations/donations.component';
 import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
+import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
+import {
+  TuiAppearanceModule,
+  TuiCardModule,
+  TuiIconModule,
+  tuiIconResolverProvider,
+  TuiSurfaceModule
+} from '@taiga-ui/experimental'
+
 
 @NgModule({
   declarations: [
@@ -76,10 +87,20 @@ import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
     TuiDataListWrapperModule,
     TuiFilterByInputPipeModule,
     TuiStringifyContentPipeModule,
-    TuiInputFilesModule
+    TuiInputFilesModule,
+    TuiCardModule,
+    TuiSurfaceModule,
+    TuiLinkModule,
+    TuiAppearanceModule,
+    TuiInputPasswordModule,
+    TuiIconModule
+
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
+    tuiIconResolverProvider(icon =>
+      icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
+    ),
   ],
   bootstrap: [AppComponent]
 })

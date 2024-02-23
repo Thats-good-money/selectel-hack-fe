@@ -2,10 +2,10 @@ import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "@core/services/auth.service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TUI_VALIDATION_ERRORS} from "@taiga-ui/kit";
 import { TuiAlertService } from "@taiga-ui/core";
+import { LoginRequest } from "@core/models/user.model";
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,8 @@ import { TuiAlertService } from "@taiga-ui/core";
       useValue: {
         required: 'Поле обязательно для заполнения',
         minlength: ({requiredLength}: {requiredLength: string}) => `Значение должно быть не менее ${requiredLength} символов`,
+        email: 'Введите корректную почту',
+
       },
     },
   ]
@@ -24,10 +26,10 @@ import { TuiAlertService } from "@taiga-ui/core";
 export class LoginComponent {
 
   public readonly loginCredentialsForm = new FormGroup({
-    username: new FormControl(
+    email: new FormControl(
       '',
       [
-        Validators.required,
+        Validators.email,
         Validators.minLength(6),
       ]
     ),
@@ -47,12 +49,12 @@ export class LoginComponent {
   ) { }
 
   public processAuth(): void {
-    const credentials = {
-      username: this.loginCredentialsForm.controls.username.value ?? '',
+    const data: LoginRequest = {
+      email: this.loginCredentialsForm.controls.email.value ?? '',
       password: this.loginCredentialsForm.controls.password.value ?? '',
     };
 
-    this._authService.login(credentials)
+    this._authService.login(data)
       .subscribe({
         complete: () => this._router.navigate(['/']),
         error: (err: HttpErrorResponse) => {

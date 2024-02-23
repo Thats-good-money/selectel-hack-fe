@@ -7,10 +7,10 @@
     <h3 class="tui-form__header tui-form__header_margin-top_none">Войти в аккаунт</h3>
     <p class="tui-space_bottom-1">
       <tui-input
-        formControlName="username"
+        formControlName="email"
         tuiTextfieldSize="l"
       >
-        Имя пользователя
+        E-mail
         <input
           tuiTextfield
           type="text"
@@ -19,7 +19,7 @@
       </tui-input>
       <tui-error
         class=""
-        formControlName="username"
+        formControlName="email"
         [error]="[] | tuiFieldError | async"
       >
       </tui-error>
@@ -44,7 +44,6 @@
       <button
         class="w-full"
         tuiButton
-        appearance="main-theme"
         type="button"
         icon="tuiIconLogIn"
         [disabled]="!loginCredentialsForm.valid"
@@ -56,7 +55,6 @@
     <p class="w-full text-center">
       <a
         class="m-auto"
-        appearance="main-theme"
         routerLink="/register"
         tuiLink
       >

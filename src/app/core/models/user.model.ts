@@ -9,10 +9,22 @@ export interface User {
   token?: string;
 }
 
-/**
- * Данные для входа пользователя.
- */
-export interface UserCredentials {
-  username: string;
+export interface LoginRequest {
+  email: string;
   password: string;
 }
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName: string;
+  tag: string;
+}
+
+export interface RegisterResponse {
+  token: string;
+};
+
+export interface LoginResponse {
+  token: string;
+};

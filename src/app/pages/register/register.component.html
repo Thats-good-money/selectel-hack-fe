@@ -9,6 +9,25 @@
     <h3 class="tui-form__header tui-form__header_margin-top_none">Зарегистрировать аккаунт</h3>
     <p class="tui-space_bottom-1">
       <tui-input
+        formControlName="email"
+        tuiTextfieldSize="l"
+      >
+        E-mail
+        <input
+          tuiTextfield
+          type="email"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="email"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p class="tui-space_bottom-1">
+      <tui-input
         formControlName="firstName"
         tuiTextfieldSize="l"
       >
@@ -26,37 +45,13 @@
       >
       </tui-error>
     </p>
-    <p class="tui-space_bottom-1">
-      <tui-input
-        formControlName="lastName"
-        tuiTextfieldSize="l"
-      >
-        Фамилия
-        <input
-          tuiTextfield
-          type="text"
-          required
-        />
-      </tui-input>
-      <tui-error
-        class=""
-        formControlName="lastName"
-        [error]="[] | tuiFieldError | async"
-      >
-      </tui-error>
-    </p>
     <p>
-      <tui-input
+      <tui-input-password
         formControlName="password"
         tuiTextfieldSize="l"
       >
         Пароль
-        <input
-          tuiTextfield
-          type="password"
-          required
-        />
-      </tui-input>
+      </tui-input-password>
       <tui-error
         class=""
         formControlName="password"
@@ -72,6 +67,8 @@
         tuiButton
         type="button"
         icon="tuiIconUser"
+        [disabled]="!registerFormComponent.valid"
+        (click)="processRegistration()"
       >
         Создать аккаунт
       </button>

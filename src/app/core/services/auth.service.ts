@@ -1,12 +1,9 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, UserCredentials } from '@core/models/user.model';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from '@core/models/user.model';
 import { environment } from 'environments/environment';
 import { Observable, map, of, tap, throwError } from 'rxjs';
 
-interface LoginOrRegisterResponse {
-  token: string;
-};
 
 /**
  * Сервис для аутентификации пользователя.
@@ -53,21 +50,18 @@ export class AuthService {
    * @param credentials данные пользователя для входа
    * @returns `Observable` с объектов ответа
    */
-  public login(credentials: UserCredentials): Observable<Object> {
+  public login(credentials: LoginRequest): Observable<Object> {
     const url = `${environment.apiUrl}/login`;
 
-    const loginObservable = this._http.post<LoginOrRegisterResponse>(
+    const loginObservable = this._http.post<LoginResponse>(
       url,
-      {
-        login: credentials.username,
-        password: credentials.password,
-      }
+      credentials,
     );
 
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.username,
+          username: credentials.email,
           points: [],
           token: res.token,
         };
@@ -81,15 +75,14 @@ export class AuthService {
    * @param credentials данные пользователя для регистрации
    * @returns `Observable` с объектов ответа
    */
-  public register(credentials: UserCredentials): Observable<Object> {
-    const url = `${environment.apiUrl}/auth/register`;
-
-    const registerObservable = this._http.post<LoginOrRegisterResponse>(url, credentials);
+  public register(credentials: RegisterRequest): Observable<Object> {
+    const url = `${environment.apiUrl}/auth/registration`;
+    const registerObservable = this._http.post<RegisterResponse>(url, credentials);
 
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.username,
+          username: credentials.email,
           points: [],
           token: res.token,
         };
