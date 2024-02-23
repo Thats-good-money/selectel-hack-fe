@@ -35,7 +35,7 @@ export class AuthService {
 
     let headers = new HttpHeaders();
     if (user?.token != undefined)
-      headers = headers.set('Authorization', user?.token);
+      headers = headers.set('Authorization', 'Bearer ' + user?.token);
 
     return headers;
   }
@@ -61,9 +61,10 @@ export class AuthService {
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: credentials.email,
-          firstName: '',
+          email: res.userDto.email,
+          firstName: res.userDto.firstName,
           token: res.token,
+          userId: res.userDto.userId,
         };
       }),
     );
@@ -82,9 +83,10 @@ export class AuthService {
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: credentials.email,
-          firstName: credentials.firstName,
+          email: res.userDto.email,
+          firstName: res.userDto.firstName,
           token: res.token,
+          userId: res.userDto.userId,
         };
       }),
     );
@@ -116,10 +118,9 @@ export class AuthService {
       return of(false);
     }
 
-    const url = `${environment.apiUrl}/auth/checkToken`;
-    const checkTokenObservable = this._http.post(
+    const url = `${environment.apiUrl}/users/${user.userId}`;
+    const checkTokenObservable = this._http.options(
       url,
-      null,
       {
         headers: this.getAuthHeaders(user),
       }

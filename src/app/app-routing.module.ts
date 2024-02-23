@@ -19,17 +19,17 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'donations',
-    component: DonationsComponent
-    // canActivate: [authGuard],
+    component: DonationsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'address-needs',
     component: AddressNeedsComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   }
 ];
 
