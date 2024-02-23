@@ -61,8 +61,8 @@ export class AuthService {
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.email,
-          points: [],
+          email: credentials.email,
+          firstName: '',
           token: res.token,
         };
       }),
@@ -82,8 +82,8 @@ export class AuthService {
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          username: credentials.email,
-          points: [],
+          email: credentials.email,
+          firstName: credentials.firstName,
           token: res.token,
         };
       }),

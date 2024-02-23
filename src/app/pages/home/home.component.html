@@ -1,177 +1,78 @@
-<div class="flex flex-col gap-2 point-panel md:gap-10 sm:flex-row">
-  <form
-    class="form"
-    (submit)="onPointFormSubmit($event)"
+<div class="flex justify-between items-center border-b-2 border-gray-300 border-solid pb-5">
+  <div class="flex justify-between items-center gap-5">
+    <tui-avatar
+      [text]="currentUser?.firstName ?? 'user'"
+      [rounded]="true"
+      size="l"
+    />
+    <h1 class="tui-text_h5">{{ currentUser?.firstName ?? 'user' }}</h1>
+  </div>
+  <button
+    tuiIconButton
+    appearance="icon"
+    icon="tuiIconMoreVerticalLarge"
+    type="button"
+    routerLink="/profile"
   >
-    <div class="form__field tui-space_bottom-6">
-      <label class="field__label">X:</label>
-
-      <form class="group" style="width: 100%" [formGroup]="testForm">
-        <div tuiGroup class="group" [collapsed]="true">
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue1"
-            size="l"
-          >
-            -3
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue2"
-            size="l"
-          >
-            -2
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue3"
-            size="l"
-          >
-            -1
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue4"
-            size="l"
-          >
-            0
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue5"
-            size="l"
-          >
-            1
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue6"
-            size="l"
-          >
-            2
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="testValue7"
-            size="l"
-          >
-            3
-          </tui-checkbox-block>
-        </div>
-
-      </form>
-    </div>
-
-
-    <div class="form__field">
-      <label class="field__label">Y:</label>
-      <form class="b-form" [formGroup]="inputForm" style="width: 100%">
-        <tui-input >
-          Input Y
-          <input tuiTextfield type="text" formControlName="testValue">
-        </tui-input>
-      </form>
-    </div>
-    <div class="form__field tui-space_top-5">
-      <label class="field__label">R:</label>
-      <form class="group" style="width: 100%" [formGroup]="rForm">
-        <div tuiGroup class="group" [collapsed]="true">
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue1"
-            size="l"
-          >
-            -3
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue2"
-            size="l"
-          >
-            -2
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue3"
-            size="l"
-          >
-            -1
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue4"
-            size="l"
-          >
-            0
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue5"
-            size="l"
-          >
-            1
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue6"
-            size="l"
-          >
-            2
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue7"
-            size="l"
-          >
-            3
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue8"
-            size="l"
-          >
-            4
-          </tui-checkbox-block>
-          <tui-checkbox-block
-            contentAlign="right"
-            formControlName="rValue9"
-            size="l"
-          >
-            5
-          </tui-checkbox-block>
-
-        </div>
-
-      </form>
-    </div>
-    <button
-      tuiButton
-      class="form__submit"
-      type="submit"
-      [disabled]="!isFormValid"
-    >Отправить</button>
-  </form>
-</div>
-<div class="results">
-  <app-points-table
-    class="points-table"
-    [points]="points"
-
-  >
-  </app-points-table>
+  </button>
 </div>
 
-<button
-  tuiButton
-  type="button"
-  class="tui-space_top-3"
-  (click)="onLogout()">Выйти
-</button>
+<div class="border-b-2 border-gray-300 border-solid pb-5 pt-5">
+  <div class="flex justify-between items-center w-full">
+    <h2 class="tui-text_h5">Центры крови</h2>
+    <a
+      icon="tuiIconChevronRight"
+      tuiLink
+      routerLink="/address-needs"
+    >
+      подробнее
+    </a>
+  </div>
+  <div class="mt-5">
+    <tui-input [formControl]="bloodCenterSearchControl">
+      Поиск
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+  </div>
+  <div class="mt-5 flex flex-col gap-3">
+    <tui-carousel
+      class="w-full p-0"
+      [draggable]="true"
+      [itemsCount]="1"
+      [(index)]="bloodCenterIndex"
+      [style.--tui-carousel-padding]="0"
+    >
+      <ng-container
+        *ngFor="let addressNeed of addressNeeds$ | async"
+      >
+        <app-address-needs-card
+          *tuiItem
+          [addressNeed]="addressNeed"
+        />
+      </ng-container>
+    </tui-carousel>
+    <tui-pagination
+      size="s"
+      class="pagination"
+      [length]="(addressNeeds$ | async)?.length ?? 0"
+      [(index)]="bloodCenterIndex"
+    />
+  </div>
+</div>
 
 <button
   tuiButton
   type="button"
   (click)="goToDonations()">
   Debug
+</button>
+<button
+  tuiButton
+  type="button"
+  class="tui-space_top-3"
+  (click)="onLogout()">Выйти
 </button>
 

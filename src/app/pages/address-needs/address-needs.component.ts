@@ -39,16 +39,4 @@ export class AddressNeedsComponent implements OnInit {
       });
   }
 
-  public checkBloodTypeNeeded(bloodType: BloodType, addressNeeds: AddressNeeds): boolean {
-    const fieldName = (
-      bloodType
-        .toLowerCase()
-        .replace('+', 'Plus')
-        .replace('-', 'Minus')
-    );
-
-    // @ts-ignore
-    return addressNeeds[fieldName] === 'need';
-  }
-
 }

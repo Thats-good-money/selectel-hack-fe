@@ -23,9 +23,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  TuiAvatarModule,
   TuiCarouselModule,
 
- TuiIslandModule, TuiPaginationModule,
+  TuiIslandModule, TuiPaginationModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
@@ -46,7 +47,8 @@ import {
   tuiIconResolverProvider,
   TuiSurfaceModule
 } from '@taiga-ui/experimental';
-import { AddressNeedsComponent } from './pages/address-needs/address-needs.component'
+import { AddressNeedsComponent } from './pages/address-needs/address-needs.component';
+import { AddressNeedsCardComponent } from './shared/components/address-needs-card/address-needs-card.component'
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
     NavbarComponent,
     DonationFormComponent,
     DonationsComponent,
-    AddressNeedsComponent
+    AddressNeedsComponent,
+    AddressNeedsCardComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
     TuiDataListWrapperModule,
     TuiCarouselModule,
     TuiPaginationModule,
-    TuiIslandModule
+    TuiIslandModule,
+    TuiAvatarModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
