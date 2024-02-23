@@ -1,10 +1,9 @@
-<h2 class="tui-text_h3">Добавление донации</h2>
-
+<h2 class="tui-text_h3">Напоминание о донации</h2>
 <h3 class="tui-form__header">Выберите тип донации</h3>
 <form class="group" [formGroup]="bloodTypeForm">
   <div
     tuiGroup
-    class="group"
+    class="group align-middle"
     orientation="vertical"
     [collapsed]="true">
     <tui-radio-block
@@ -19,7 +18,7 @@
   </div>
 </form>
 
-<h3 class="tui-form__header">Дата донации</h3>
+<h3 class="tui-form__header">Планируемая дата</h3>
 <form class="b-form"
       [formGroup]="donationDateForm"
       [tuiTextfieldCleaner]="true">
@@ -44,6 +43,7 @@
       formControlName="donationType"
       item="donationType1"
       size="l"
+
     >
       <div class="inner">
         Безвозмездно
@@ -78,7 +78,6 @@
       formControlName="place"
       item="place1"
       size="l"
-
     >
       <div class="inner">
         Стационарный пункт
@@ -92,7 +91,6 @@
       formControlName="place"
       item="place2"
       size="l"
-
     >
       <div class="inner">
         Выездная акция
@@ -113,16 +111,19 @@
     Выберите город
 
     <tui-data-list-wrapper
-      emptyContent="Ничего не найдено"
       *tuiDataList
       [items]="simpleCities"
+      emptyContent="Ничего не найдено"
     >
     </tui-data-list-wrapper>
   </tui-combo-box>
 </label>
 
 <h3 class="tui-form__header">Центр крови</h3>
-<label>
+<label tuiLabel="Важно: если ваш центр крови принимает по записи, то нужно
+    отдельно записаться на сайте центра крови или через Госуслуги.
+    Планирование донации на сайте DonorSearch позволит нам за 3 дня
+    до указанной даты напомнить о вашем намерении совершить донацию и подготовиться к ней.">
   <tui-combo-box
     [formControl]="stationControl"
     [tuiTextfieldLabelOutside]="true"
@@ -130,86 +131,39 @@
     Выберите центр крови
 
     <tui-data-list-wrapper
-      emptyContent="Ничего не найдено"
       *tuiDataList
       [items]="stationsHeaders"
+      emptyContent="Ничего не найдено"
     ></tui-data-list-wrapper>
   </tui-combo-box>
 </label>
 
 
-<h3 class="tui-form__header">Справка</h3>
-<form class="control" [formGroup]="certificateForm">
-  <div class="flex">
+<div class="flex">
+  <button
+    tuiButton
+    type="submit"
+    class="mt-4"
+    (click)="submitForm()">
+    Напомнить о донации
+  </button>
 
-    <tui-radio-block
-      formControlName="certificate"
-      item="cert1"
-      size="l"
-      class="mr-4"
-    >
-      <div class="inner">
-        Загрузить сейчас
-        <div class="text">
-          Справку выданную в центре крови.
-        </div>
-      </div>
-    </tui-radio-block>
+  <tui-avatar
+    class="ml-4 mt-3"
+    size="l"
+    text="!"
+    tuiHintAppearance="onLight"
+    tuiHintDirection="right"
+    [autoColor]="true"
+    [rounded]="true"
+    [tuiHint]="tooltip"
+  >
+  </tui-avatar>
+  <ng-template #tooltip>
+    <div>Планирование не означает</div>
+    <div> запись на донацию в</div>
+    <div> центр крови</div>
+  </ng-template>
+</div>
 
-    <tui-radio-block
-      formControlName="certificate"
-      item="cert2"
-      size="l"
-      class="mr-4"
-    >
-      <div class="inner">
-        Загрузить потом
-        <div class="text">
-          Справку можно будет загрузить позже. Донация без справки не будет учитываться для пути почетного донора.        </div>
-      </div>
-    </tui-radio-block>
-  </div>
-</form>
-
-<tui-input-files
-  *ngIf="!control.value && needCert"
-  accept="image/*"
-  [formControl]="control"
-  (reject)="onReject($event)"
-  class="mt-4"
-  link="Выберите"
-  label="или перетащите файл"
-></tui-input-files>
-
-<tui-files class="tui-space_top-1">
-  <tui-file
-    *ngIf="loadedFiles$ | async as file"
-    [file]="file"
-    [showDelete]="control.enabled"
-    (removed)="removeFile()"
-  ></tui-file>
-
-  <tui-file
-    *ngIf="rejectedFiles$ | async as file"
-    state="error"
-    [file]="file"
-    [showDelete]="control.enabled"
-    (removed)="clearRejected()"
-  ></tui-file>
-
-  <tui-file
-    *ngIf="loadingFiles$ | async as file"
-    state="loading"
-    [file]="file"
-    [showDelete]="control.enabled"
-  ></tui-file>
-</tui-files>
-
-<button
-  tuiButton
-  type="submit"
-  class="mt-4"
-  (click)="submitForm()">
-  Сохранить донацию
-</button>
 
