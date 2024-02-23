@@ -115,8 +115,9 @@ export class AuthService {
     }
 
     const url = `${environment.apiUrl}/users/${user.userId}`;
-    const checkTokenObservable = this._http.options(
+    const checkTokenObservable = this._http.patch(
       url,
+      {},
       {
         headers: this.getAuthHeaders(user),
       }
