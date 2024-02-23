@@ -38,11 +38,10 @@ import {
 import {
   TuiCheckboxBlockModule,
   TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
-  TuiInputDateModule, TuiInputFilesModule,  TuiInputDateModule,
+  TuiInputFilesModule,  TuiInputDateModule,
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
-import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
 import { DonationsComponent } from './pages/donations/donations.component';
 import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
 import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
@@ -101,7 +100,6 @@ import { AddressNeedsCardComponent } from './shared/components/address-needs-car
     TuiObscuredModule,
     TuiComboBoxModule,
     TuiDataListWrapperModule,
-    TuiFilterByInputPipeModule,
     TuiStringifyContentPipeModule,
     TuiInputFilesModule,
     TuiCardModule,
