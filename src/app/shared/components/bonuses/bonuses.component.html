@@ -1,0 +1,36 @@
+<h3 class="tui-text_h3">Бонусы</h3>
+
+
+<div class="container">
+  <div *ngFor="let bonus of bonuses">
+      <a
+        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        class="mt-4"
+        rel="noreferrer"
+        size="l"
+        target="_blank"
+        tuiIsland
+        [hoverable]="true"
+      >
+        <img
+          alt="bonus_img"
+          class="image"
+          [src]="bonus.bonusImage"
+        />
+        <h3 class="title title_size_s">{{bonus.bonusName}}</h3>
+
+        <div style="display: flex; flex-direction: row">
+          <tui-avatar
+            class="mr-3"
+            [avatarUrl]="bonus.partnerImage"
+          ></tui-avatar>
+
+          <p class="text">
+            до {{bonus.expiration}}
+          </p>
+        </div>
+
+      </a>
+
+</div>
+</div>

@@ -39,14 +39,14 @@ export class RegisterComponent {
       [
         Validators.required,
         Validators.pattern(/^[a-zA-Zа-яА-Я]+$/),
-        Validators.minLength(8),
+        Validators.minLength(2),
       ]
     ),
     password: new FormControl(
       '',
       [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(6),
       ]
     )
   });

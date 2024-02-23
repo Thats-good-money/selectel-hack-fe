@@ -54,6 +54,8 @@ import {
 } from '@taiga-ui/experimental';
 import { AddressNeedsComponent } from './pages/address-needs/address-needs.component';
 import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
+import {AddressNeedsCardComponent} from "@shared/components/address-needs-card/address-needs-card.component";
+import { BonusesComponent } from './shared/components/bonuses/bonuses.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { PlanDonationComponent } from './pages/plan-donation/plan-donation.compo
     DonationsComponent,
     AddressNeedsComponent,
     PlanDonationComponent,
+    AddressNeedsCardComponent,
+    BonusesComponent,
   ],
   imports: [
     BrowserModule,
