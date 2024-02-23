@@ -31,7 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiAvatarModule,
   TuiCarouselModule,
-  TuiIslandModule, TuiPaginationModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiPaginationModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
@@ -114,6 +114,7 @@ import { PlanDonationComponent } from './pages/plan-donation/plan-donation.compo
     TuiAvatarModule,
     TuiHintModule,
     TuiButtonModule,
+    TuiMarkerIconModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

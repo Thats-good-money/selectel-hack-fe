@@ -25,4 +25,5 @@ export interface AddressNeeds {
 export interface AddressNeedsFilters {
   bloodType?: BloodType | null;
   city?: string | null;
+  title?: string | null;
 }

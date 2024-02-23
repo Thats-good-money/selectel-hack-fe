@@ -4,8 +4,8 @@ import { PointData } from "./point.model";
  * Пользователь.
  */
 export interface User {
-  username: string;
-  points: PointData[];
+  email: string;
+  firstName: string;
   token?: string;
 }
 

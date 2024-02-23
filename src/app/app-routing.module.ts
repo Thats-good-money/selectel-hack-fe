@@ -22,10 +22,10 @@ const routes: Routes = [
     component: HomeComponent,
     // canActivate: [authGuard],
   },
-
   {
     path: 'donations',
     component: DonationsComponent
+    // canActivate: [authGuard],
   },
 
   {

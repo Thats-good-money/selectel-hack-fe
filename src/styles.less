@@ -1,8 +1,8 @@
 @import '@taiga-ui/core/styles/taiga-ui-local.less';
 
 * {
-  --tui-primary: #DA4133;
-  --tui-primary-hover: #A22418;
+  --tui-primary: #FF2A24;
+  --tui-primary-hover: #d3130f;
   --tui-accent: #fff;
   --tui-link: var(--tui-primary);
   --tui-link-hover: var(--tui-primary-hover);
@@ -24,3 +24,16 @@ body {
     background: #7E3930;
   });
 }
+
+[tuiWrapper][data-appearance='outline-success'] {
+  background: none;
+  color: #53C38C;
+  border: 1px solid #53C38C;
+}
+
+[tuiWrapper][data-appearance='outline-danger'] {
+  background: none;
+  color: #FF2A24;
+  border: 1px solid #FF2A24;
+}
+

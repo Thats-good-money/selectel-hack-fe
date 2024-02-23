@@ -19,3 +19,8 @@
   @include card;
   @apply mt-2 md:mt-10 w-full;
 }
+
+
+tui-pagination {
+  --tui-secondary: #c8c8c8;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+
+  public get isNavbarShown(): boolean {
+    const urlsWithoutNavbar = ['', '/', '/login', '/register'];
+    return !urlsWithoutNavbar.includes(this._location.path());
+  }
+
+  constructor(
+    private _location: Location,
+  ) {
+  }
+
 }
