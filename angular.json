@@ -32,6 +32,11 @@
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",
                 "output": "assets/taiga-ui/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
               }
             ],
             "styles": [
@@ -124,5 +129,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c608ba54-a445-4a2e-a4ac-ee85370287c5"
   }
 }
