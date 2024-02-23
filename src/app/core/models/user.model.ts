@@ -13,6 +13,6 @@ export interface User {
  * Данные для входа пользователя.
  */
 export interface UserCredentials {
-  username: string;
+  login: string;
   password: string;
 }

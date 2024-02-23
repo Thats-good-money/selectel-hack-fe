@@ -48,7 +48,7 @@ export class LoginComponent {
 
   public processAuth(): void {
     const credentials = {
-      username: this.loginCredentialsForm.controls.username.value ?? '',
+      login: this.loginCredentialsForm.controls.username.value ?? '',
       password: this.loginCredentialsForm.controls.password.value ?? '',
     };
 

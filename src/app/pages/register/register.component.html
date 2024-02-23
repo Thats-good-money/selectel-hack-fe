@@ -46,17 +46,12 @@
       </tui-error>
     </p>
     <p>
-      <tui-input
+      <tui-input-password
         formControlName="password"
         tuiTextfieldSize="l"
       >
         Пароль
-        <input
-          tuiTextfield
-          type="password"
-          required
-        />
-      </tui-input>
+      </tui-input-password>
       <tui-error
         class=""
         formControlName="password"
@@ -72,6 +67,8 @@
         tuiButton
         type="button"
         icon="tuiIconUser"
+        [disabled]="!registerFormComponent.valid"
+        (click)="processRegistration()"
       >
         Создать аккаунт
       </button>
