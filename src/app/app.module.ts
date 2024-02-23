@@ -55,7 +55,8 @@ import {
 import { AddressNeedsComponent } from './pages/address-needs/address-needs.component';
 
 import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
-import { AddressNeedsCardComponent } from './shared/components/address-needs-card/address-needs-card.component'
+import { AddressNeedsCardComponent } from './shared/components/address-needs-card/address-needs-card.component';
+import { MyDonationsComponent } from './pages/my-donations/my-donations.component'
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { AddressNeedsCardComponent } from './shared/components/address-needs-car
     DonationsComponent,
     AddressNeedsComponent,
     PlanDonationComponent,
-    AddressNeedsCardComponent
+    AddressNeedsCardComponent,
+    MyDonationsComponent
   ],
   imports: [
     BrowserModule,
@@ -119,9 +121,9 @@ import { AddressNeedsCardComponent } from './shared/components/address-needs-car
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
-    tuiIconResolverProvider(icon =>
-      icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
-    ),
+    // tuiIconResolverProvider(icon =>
+    //   icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
+    // ),
   ],
   bootstrap: [AppComponent]
 })
