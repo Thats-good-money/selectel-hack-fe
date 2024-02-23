@@ -5,7 +5,7 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
   TuiButtonModule,
-  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule
+  TuiGroupModule, TuiErrorModule, TuiTextfieldControllerModule, TuiDropdownModule, TuiLinkModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -22,27 +22,27 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from '@angular/common';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  TuiCheckboxBlockModule,
-  TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
+  TuiCarouselModule, TuiCheckboxBlockModule, TuiCheckboxModule, TuiComboBoxModule,
+  TuiDataListWrapperModule,
   TuiFieldErrorPipeModule, TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
   TuiInputModule,
-  TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
+  TuiInputPasswordModule, TuiIslandModule, TuiPaginationModule, TuiRadioBlockModule,
+  TuiSelectModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
-import {TuiTableModule} from "@taiga-ui/addon-table";
-import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
-import { DonationFormComponent } from './shared/components/donation-form/donation-form.component';
-import { DonationsComponent } from './pages/donations/donations.component';
-import {TuiActiveZoneModule, TuiObscuredModule} from "@taiga-ui/cdk";
-import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from "@taiga-ui/kit";
 import {
   TuiAppearanceModule,
   TuiCardModule,
   TuiIconModule,
   tuiIconResolverProvider,
   TuiSurfaceModule
-} from '@taiga-ui/experimental'
+} from '@taiga-ui/experimental';
+import { AddressNeedsComponent } from './pages/address-needs/address-needs.component'
+import { DonationFormComponent } from "@shared/components/donation-form/donation-form.component";
+import { TuiTableModule } from "@taiga-ui/addon-table";
+import { TuiActiveZoneModule, TuiObscuredModule } from "@taiga-ui/cdk";
+import { DonationsComponent } from "@pages/donations/donations.component";
 
 
 @NgModule({
@@ -56,6 +56,7 @@ import {
     NavbarComponent,
     DonationFormComponent,
     DonationsComponent,
+    AddressNeedsComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,8 +94,12 @@ import {
     TuiLinkModule,
     TuiAppearanceModule,
     TuiInputPasswordModule,
-    TuiIconModule
-
+    TuiIconModule,
+    TuiSelectModule,
+    TuiDataListWrapperModule,
+    TuiCarouselModule,
+    TuiPaginationModule,
+    TuiIslandModule
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
