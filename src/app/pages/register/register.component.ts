@@ -5,6 +5,7 @@ import { AuthService } from "@core/services/auth.service";
 import { Router } from "@angular/router";
 import { TuiAlertService } from "@taiga-ui/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { RegisterRequest } from "@core/models/user.model";
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ import { HttpErrorResponse } from "@angular/common/http";
       useValue: {
         required: 'Поле обязательно для заполнения',
         minlength: ({requiredLength}: {requiredLength: string}) => `Значение должно быть не менее ${requiredLength} символов`,
+        email: 'Введите корректную почту',
+        pattern: 'Имя должно содержать только буквы',
       },
     },
   ]
@@ -23,18 +26,20 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class RegisterComponent {
 
   public readonly registerFormComponent = new FormGroup({
+    email: new FormControl(
+      '',
+      [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6),
+      ]
+    ),
     firstName: new FormControl(
       '',
       [
         Validators.required,
-        Validators.pattern(/[a-zA-Zа-яА-Я]*/),
-      ]
-    ),
-    lastName: new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/[a-zA-Zа-яА-Я]*/),
+        Validators.pattern(/^[a-zA-Zа-яА-Я]+$/),
+        Validators.minLength(8),
       ]
     ),
     password: new FormControl(
@@ -46,12 +51,6 @@ export class RegisterComponent {
     )
   });
 
-  private get _username(): string {
-    const firstName = this.registerFormComponent.controls.firstName.value ?? '';
-    const lastName = this.registerFormComponent.controls.lastName.value ?? '';
-    return `${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
-  }
-
   constructor(
     private _authService: AuthService,
     private _router: Router,
@@ -59,12 +58,14 @@ export class RegisterComponent {
   ) { }
 
   public processRegistration(): void {
-    const credentials = {
-      login: this._username,
+    const data: RegisterRequest = {
+      email: this.registerFormComponent.controls.email.value ?? '',
+      firstName: this.registerFormComponent.controls.firstName.value ?? '',
       password: this.registerFormComponent.controls.password.value ?? '',
-    };
+      tag: undefined ?? 'user',
+    }
 
-    this._authService.register(credentials)
+    this._authService.register(data)
       .subscribe({
         complete: () => this._router.navigate(['/']),
         error: (err: HttpErrorResponse) => {
