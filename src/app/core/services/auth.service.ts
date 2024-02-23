@@ -114,7 +114,7 @@ export class AuthService {
   public authViaToken(): Observable<boolean> {
     const user = this._restoreUser();
 
-    if (user == undefined || user.token == undefined || user.userId ) {
+    if (user == undefined || user.token == undefined) {
       return of(false);
     }
 
