@@ -1,46 +1,48 @@
-<div
-  tuiCardLarge
-  tuiSurface="elevated"
->
-  <form class="form" [formGroup]="needsFilterForm">
-    <div class="tui-form__row tui-form__row_multi-fields w-full">
-      <div class="tui-form__multi-field">
-        <label tuiLabel="Группа крови">
-          <tui-select
-            formControlName="bloodType"
+<div class="flex flex-col gap-5">
+  <div
+    tuiCardLarge
+    tuiSurface="elevated"
+  >
+    <form class="form" [formGroup]="needsFilterForm">
+      <div class="tui-form__row tui-form__row_multi-fields w-full">
+        <div class="tui-form__multi-field">
+          <label tuiLabel="Группа крови">
+            <tui-select
+              formControlName="bloodType"
+            >
+              Группа крови
+              <tui-data-list-wrapper
+                *tuiDataList
+                [items]="bloodTypes"
+              />
+            </tui-select>
+          </label>
+        </div>
+        <div class="tui-form__multi-field">
+          <tui-input
+            formControlName="city"
+            tuiTextfieldSize="l"
           >
-            Группа крови
-            <tui-data-list-wrapper
-              *tuiDataList
-              [items]="bloodTypes"
+            Город
+            <input
+              tuiTextfield
+              type="text"
+              required
             />
-          </tui-select>
-        </label>
+          </tui-input>
+          <tui-error
+            class=""
+            formControlName="city"
+            [error]="[] | tuiFieldError | async"
+          >
+          </tui-error>
+        </div>
       </div>
-      <div class="tui-form__multi-field">
-        <tui-input
-          formControlName="city"
-          tuiTextfieldSize="l"
-        >
-          Город
-          <input
-            tuiTextfield
-            type="text"
-            required
-          />
-        </tui-input>
-        <tui-error
-          class=""
-          formControlName="city"
-          [error]="[] | tuiFieldError | async"
-        >
-        </tui-error>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
-<app-address-needs-card
-  *ngFor="let addressNeed of addressNeeds$ | async"
-  [addressNeed]="addressNeed"
-/>
+  <app-address-needs-card
+    *ngFor="let addressNeed of addressNeeds$ | async"
+    [addressNeed]="addressNeed"
+  />
+</div>
