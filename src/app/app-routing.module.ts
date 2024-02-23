@@ -18,11 +18,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'address-needs',
     component: AddressNeedsComponent,
+    // canActivate: [authGuard],
   }
 ];
 
