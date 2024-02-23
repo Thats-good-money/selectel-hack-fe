@@ -5,6 +5,7 @@ import { AuthService } from '@core/services/auth.service';
 import { PointsService } from '@core/services/points.service';
 import { rAxis, validateValue, xAxis, yAxis } from '@shared/lib/coords-info';
 import { Subscription } from 'rxjs';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,51 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
+
+
+  testForm = new FormGroup({
+    testValue1: new FormControl(false),
+    testValue2: new FormControl(false),
+    testValue3: new FormControl(false),
+    testValue4: new FormControl(false),
+    testValue5: new FormControl(false),
+    testValue6: new FormControl(false),
+    testValue7: new FormControl(false),
+  });
+
+  rForm = new FormGroup({
+    rValue1: new FormControl(false),
+    rValue2: new FormControl(false),
+    rValue3: new FormControl(false),
+    rValue4: new FormControl(false),
+    rValue5: new FormControl(false),
+    rValue6: new FormControl(false),
+    rValue7: new FormControl(false),
+    rValue8: new FormControl(false),
+    rValue9: new FormControl(false),
+  })
+
+  readonly inputForm = new FormGroup({
+    testValue: new FormControl('')
+  })
+
+
+
+  onBlur(event: any){
+    console.log(event.target.value)
+  }
+
+  logValue(){
+    console.log(this.inputForm.get('testValue')?.value)
+    console.log(this.testForm?.value)
+    console.log(this.rForm?.value)
+  }
+
+  goToDonations(){
+    this._router.navigate(['/donations'])
+  }
+
 
   /**
    * Точки.
@@ -64,7 +110,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _pointsService: PointsService,
     private _authService: AuthService,
     private _router: Router,
-  ) { }
+
+  ) {
+
+  }
 
   ngOnInit(): void {
     this._getPoints();
@@ -135,4 +184,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._router.navigate(['/login']);
   }
 
+  protected readonly Number = Number;
 }
