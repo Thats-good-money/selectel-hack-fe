@@ -28,3 +28,5 @@ export interface RegisterResponse {
 export interface LoginResponse {
   token: string;
 };
+
+export type BloodType = 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';

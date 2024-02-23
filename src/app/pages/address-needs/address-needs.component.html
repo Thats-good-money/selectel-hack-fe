@@ -1,0 +1,52 @@
+<h3 class="tui-form__header tui-form__header_margin-top_none">Где сдать кровь</h3>
+
+<div
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <form class="form" [formGroup]="needsFilterForm">
+    <div class="tui-form__row tui-form__row_multi-fields w-full">
+      <div class="tui-form__multi-field">
+        <label tuiLabel="Группа крови">
+          <tui-select
+            formControlName="bloodType"
+            [tuiTextfieldLabelOutside]="true"
+          >
+            Группа крови
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="bloodTypes"
+            />
+          </tui-select>
+        </label>
+      </div>
+      <div class="tui-form__multi-field">
+        <tui-input
+          formControlName="city"
+          tuiTextfieldSize="l"
+        >
+          Город
+          <input
+            tuiTextfield
+            type="text"
+            required
+          />
+        </tui-input>
+        <tui-error
+          class=""
+          formControlName="city"
+          [error]="[] | tuiFieldError | async"
+        >
+        </tui-error>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div
+  tuiCardLarge
+  tuiSurface="elevated"
+  *ngFor="let addressNeed of (addressNeeds$ | async)"
+>
+  <p>{{ addressNeed.bloodStation.title }}</p>
+</div>
