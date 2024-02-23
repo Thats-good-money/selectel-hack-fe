@@ -76,7 +76,7 @@ export class AuthService {
    * @returns `Observable` с объектов ответа
    */
   public register(credentials: RegisterRequest): Observable<Object> {
-    const url = `${environment.apiUrl}/auth/registration`;
+    const url = `${environment.apiUrl}/registration`;
     const registerObservable = this._http.post<RegisterResponse>(url, credentials);
 
     return registerObservable.pipe(
