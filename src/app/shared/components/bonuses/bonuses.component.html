@@ -1,0 +1,74 @@
+<h3 class="tui-text_h3">Бонусы</h3>
+
+
+<div class="container">
+  <div *ngFor="let bonus of bonuses">
+      <tui-island>
+        <div [class.disabled-component]="bonus.taken">
+
+        <img
+          alt="bonus_img"
+          class="image"
+          [src]="bonus.bonusImage"
+        />
+        <h3 class="title title_size_s">{{bonus.bonusName}}</h3>
+
+        <div style="display: flex; flex-direction: row">
+          <tui-avatar
+            class="mr-3"
+            [avatarUrl]="bonus.partnerImage"
+          ></tui-avatar>
+
+          <p class="text">
+            до {{bonus.expiration}}
+          </p>
+        </div>
+
+        <button
+          *ngIf="!bonus.taken"
+          size="l"
+          tuiButton
+          type="button"
+          (click)="findDetails(bonus)"
+          [disabled]="bonus.taken"
+          >
+          Подробнее
+        </button>
+
+          <ng-template
+            let-observer
+            [tuiSheetDialogOptions]="bonusDetails"
+            [(tuiSheetDialog)]="open"
+          >
+
+            <h4 class="tui-text_h3">{{newBonusItem.bonusName}}</h4>
+
+            <p class="mt-4 mb-4 tui-text_bold">Партнер: {{newBonusItem.partnerName}}</p>
+
+            {{newBonusItem.description}}
+
+            <button
+              size="m"
+              tuiButton
+              class="mt-4"
+              style="display: grid; grid-template-columns: auto"
+              (click)="claimBonus(newBonusItem, 'Бонус получен', observer)">
+              Получить</button>
+
+          </ng-template>
+
+        </div>
+
+        <div *ngIf="bonus.taken">
+          <span>Ваш промокод: {{promocode}}</span>
+          <button tuiButton size="xs" (click)="copyText(promocode)" class="ml-3" icon="tuiIconLayers"></button>
+
+          <p class="tui-text_bold mt-4">Оцените бонус:</p>
+            <tui-rating class="rating" [(ngModel)]="rateValue"></tui-rating>
+          <button tuiButton size="xs" (click)="postFeedback()" class="ml-3" icon="tuiIconUpload"></button>
+
+        </div>
+      </tui-island>
+
+</div>
+</div>

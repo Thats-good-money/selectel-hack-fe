@@ -12,7 +12,6 @@ import {
   TuiLinkModule,
   TuiLabelModule,
   TuiHintModule
-
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -32,13 +31,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiAvatarModule,
   TuiCarouselModule,
-  TuiIslandModule, TuiPaginationModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiPaginationModule, TuiRatingModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
   TuiCheckboxBlockModule,
   TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
-  TuiInputFilesModule,  TuiInputDateModule,
+  TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
@@ -53,9 +52,10 @@ import {
   TuiSurfaceModule
 } from '@taiga-ui/experimental';
 import { AddressNeedsComponent } from './pages/address-needs/address-needs.component';
-
 import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
-import { AddressNeedsCardComponent } from './shared/components/address-needs-card/address-needs-card.component';
+import {AddressNeedsCardComponent} from "@shared/components/address-needs-card/address-needs-card.component";
+import { BonusesComponent } from './shared/components/bonuses/bonuses.component';
+import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
 import { MyDonationsComponent } from './pages/my-donations/my-donations.component';
 import { ProfileComponent } from './pages/profile/profile.component'
 
@@ -73,6 +73,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
     AddressNeedsComponent,
     PlanDonationComponent,
     AddressNeedsCardComponent,
+    BonusesComponent,
     MyDonationsComponent,
     ProfileComponent
   ],
@@ -120,6 +121,10 @@ import { ProfileComponent } from './pages/profile/profile.component'
     TuiLabelModule,
     TuiAvatarModule,
     TuiHintModule,
+    TuiButtonModule,
+    TuiMarkerIconModule,
+    TuiSheetDialogModule,
+    TuiRatingModule,
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
