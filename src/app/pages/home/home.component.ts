@@ -29,15 +29,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-
-    private _addressNeedsService: AddressNeedsService,
+    private _addressNeedsService: BloodStationsService,
   ) {
   }
 
-    private _addressNeedsService: BloodStationsService,
-  ) { }
 
-  public ngOnInit(): void {
+ ngOnInit(): void {
     this.addressNeeds$ = this._addressNeedsService.getBloodStationsList({});
 
     this.bloodCenterSearchControl.valueChanges
