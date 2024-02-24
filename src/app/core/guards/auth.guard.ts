@@ -20,6 +20,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   return authService.authViaToken().pipe(
-    catchError(e => router.navigate(['/login'])),
+    catchError(e => of(false)),
+    tap(result => {
+      if (!result) {
+        router.navigate(['/login']);
+      }
+    }),
   );
 };

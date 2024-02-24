@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TUI_VALIDATION_ERRORS } from "@taiga-ui/kit";
 import { AuthService } from "@core/services/auth.service";
 import { TuiAlertService } from "@taiga-ui/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -55,6 +56,7 @@ export class ProfileComponent implements OnInit {
     private _geographyService: GeographyService,
     private _authService: AuthService,
     private _alerts: TuiAlertService,
+    private _router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -83,6 +85,11 @@ export class ProfileComponent implements OnInit {
 
   public updatePassword(): void {
      // TODO
+  }
+
+  public logout(): void {
+    this._authService.logout()
+      .subscribe(() => this._router.navigate(['/login']));
   }
 
   private _fillFieldsWithUserData(): void {
