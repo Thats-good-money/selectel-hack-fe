@@ -1,0 +1,53 @@
+<div
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-5">
+      <tui-icon
+        icon="tuiIconCalendarLarge"
+        [style.color]="'var(--tui-primary)'"
+      />
+      <p class="text-gray-500">16 февраля 2024</p>
+    </div>
+    <div class="flex">
+      <button
+        appearance="icon"
+        tuiIconButton
+        icon="tuiIconEditLarge"
+      >
+      </button>
+      <button
+        appearance="icon"
+        tuiIconButton
+        icon="tuiIconCloseLarge"
+      >
+      </button>
+    </div>
+  </div>
+  <div>
+    <p>Городская станция переливания крови Санкт-Петербурга</p>
+    <p class="text-gray-500">Санкт-Петербург, Кронверкский пр., 49</p>
+  </div>
+  <div class="text-gray-500 flex flex-row gap-5">
+    <img src="/assets/icons/blood.svg"/>
+    <p>Чистая кровь</p>
+  </div>
+</div>
+
+<button
+  class="w-full mt-5"
+  tuiButton
+  icon="tuiIconPlusCircleLarge"
+  routerLink="/donations"
+>
+  Добавить донацию
+</button>
+<button
+  class="w-full mt-3"
+  tuiButton
+  icon="tuiIconCalendarLarge"
+  routerLink="/plan-donation"
+>
+  Запланировать донацию
+</button>

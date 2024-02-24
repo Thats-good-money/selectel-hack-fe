@@ -6,7 +6,7 @@
     <form class="form" [formGroup]="needsFilterForm">
       <div class="tui-form__row tui-form__row_multi-fields w-full">
         <div class="tui-form__multi-field">
-          <label tuiLabel="Группа крови">
+          <label>
             <tui-select
               formControlName="bloodType"
             >
@@ -19,23 +19,21 @@
           </label>
         </div>
         <div class="tui-form__multi-field">
-          <tui-input
-            formControlName="city"
-            tuiTextfieldSize="l"
-          >
-            Город
-            <input
-              tuiTextfield
-              type="text"
-              required
-            />
-          </tui-input>
-          <tui-error
-            class=""
-            formControlName="city"
-            [error]="[] | tuiFieldError | async"
-          >
-          </tui-error>
+          <label>
+            <tui-combo-box
+              formControlName="city"
+              [tuiTextfieldLabelOutside]="true"
+            >
+              Город
+
+              <tui-data-list-wrapper
+                emptyContent="Ничего не найдено"
+                *tuiDataList
+                [items]="cities"
+              >
+              </tui-data-list-wrapper>
+            </tui-combo-box>
+          </label>
         </div>
       </div>
     </form>

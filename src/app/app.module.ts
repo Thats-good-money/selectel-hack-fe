@@ -38,7 +38,6 @@ import {
   TuiCheckboxBlockModule,
   TuiCheckboxModule, TuiComboBoxModule, TuiDataListWrapperModule,
   TuiFilterByInputPipeModule, TuiInputDateModule, TuiInputFilesModule,
-
   TuiRadioBlockModule, TuiStringifyContentPipeModule, TuiUnfinishedValidatorModule
 } from "@taiga-ui/kit";
 import {TuiTableModule} from "@taiga-ui/addon-table";
@@ -57,6 +56,9 @@ import { PlanDonationComponent } from './pages/plan-donation/plan-donation.compo
 import {AddressNeedsCardComponent} from "@shared/components/address-needs-card/address-needs-card.component";
 import { BonusesComponent } from './shared/components/bonuses/bonuses.component';
 import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
+import { MyDonationsComponent } from './pages/my-donations/my-donations.component';
+import { ProfileComponent } from './pages/profile/profile.component'
+
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
     PlanDonationComponent,
     AddressNeedsCardComponent,
     BonusesComponent,
+    MyDonationsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +105,6 @@ import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
     TuiObscuredModule,
     TuiComboBoxModule,
     TuiDataListWrapperModule,
-    TuiFilterByInputPipeModule,
     TuiStringifyContentPipeModule,
     TuiInputFilesModule,
     TuiCardModule,
@@ -125,9 +128,9 @@ import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
-    tuiIconResolverProvider(icon =>
-      icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
-    ),
+    // tuiIconResolverProvider(icon =>
+    //   icon.includes('/') ? icon : `/assets/icons/${icon}.svg`,
+    // ),
   ],
   bootstrap: [AppComponent]
 })

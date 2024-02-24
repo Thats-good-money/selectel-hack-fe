@@ -6,7 +6,7 @@ import { catchError, map, of, tap } from 'rxjs';
 
 /**
  * Guard для проверки, аутентифицирован ли пользователь.
- * 
+ *
  * @param route текущий роут
  * @param state объект состояния
  * @returns аутентифицирован ли пользователь
@@ -20,9 +20,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   return authService.authViaToken().pipe(
-    tap(isTokinValid => {
-      if (!isTokinValid)
-        router.navigate(['/login']);
-    })
+    catchError(e => router.navigate(['/login'])),
   );
 };

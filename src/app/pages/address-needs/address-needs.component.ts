@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { BloodType } from "@core/models/user.model";
 import { AddressNeeds } from "@core/models/address-needs.model";
-import { debounceTime, Observable, of } from "rxjs";
+import { debounceTime, map, Observable, of } from "rxjs";
 import { AddressNeedsService } from '@core/services/address-needs.service';
+import { City } from "@core/models/geography.model";
+import { GeographyService } from "@core/services/geography.service";
+import { AuthService } from "@core/services/auth.service";
 
 @Component({
   selector: 'app-address-needs',
@@ -21,12 +24,23 @@ export class AddressNeedsComponent implements OnInit {
 
   public addressNeeds$: Observable<AddressNeeds[]> = of([]);
 
+  public cities: string[] = [];
+
   constructor(
     private _addressNeedsService: AddressNeedsService,
+    private _geographyService: GeographyService,
+    private _authService: AuthService,
   ) {}
 
   public ngOnInit(): void {
-    this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
+    this._geographyService.getCitiesList()
+      .pipe(
+        map(cities => cities.map(city => city.title)),
+      )
+      .subscribe(cities => {
+        this.cities = cities;
+        this._initFormWithUserData();
+      });
 
     this.needsFilterForm.valueChanges
       .pipe(
@@ -37,6 +51,25 @@ export class AddressNeedsComponent implements OnInit {
           this.needsFilterForm.value
         );
       });
+
+  }
+
+  private _initFormWithUserData(): void {
+    const userBloodType = this._authService.currentUser?.bloodType;
+    const userCity = this._authService.currentUser?.city;
+    let formChanged = false;
+    if (userBloodType) {
+      this.needsFilterForm.controls.bloodType.setValue(userBloodType);
+      formChanged = true;
+    }
+
+    if (userCity && this.cities.includes(userCity)) {
+      this.needsFilterForm.controls.city.setValue(userCity);
+      formChanged = true;
+    }
+
+    if (!formChanged)
+      this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
   }
 
 }

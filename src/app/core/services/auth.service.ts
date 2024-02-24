@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from '@core/models/user.model';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, UserDTO } from '@core/models/user.model';
 import { environment } from 'environments/environment';
 import { Observable, map, of, tap, throwError } from 'rxjs';
 
@@ -35,7 +35,7 @@ export class AuthService {
 
     let headers = new HttpHeaders();
     if (user?.token != undefined)
-      headers = headers.set('Authorization', user?.token);
+      headers = headers.set('Authorization', `Bearer ${user?.token}`);
 
     return headers;
   }
@@ -61,8 +61,7 @@ export class AuthService {
     return loginObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: credentials.email,
-          firstName: '',
+          ...res.userDto,
           token: res.token,
         };
       }),
@@ -82,8 +81,7 @@ export class AuthService {
     return registerObservable.pipe(
       tap(res => {
         this.currentUser = {
-          email: credentials.email,
-          firstName: credentials.firstName,
+          ...res.userDto,
           token: res.token,
         };
       }),
@@ -116,10 +114,10 @@ export class AuthService {
       return of(false);
     }
 
-    const url = `${environment.apiUrl}/auth/checkToken`;
-    const checkTokenObservable = this._http.post(
+    const url = `${environment.apiUrl}/users/${user.userId}`;
+    const checkTokenObservable = this._http.patch(
       url,
-      null,
+      {},
       {
         headers: this.getAuthHeaders(user),
       }
@@ -128,6 +126,30 @@ export class AuthService {
     return checkTokenObservable.pipe(
       map(res => {
         this.currentUser = user;
+        return true;
+      })
+    )
+  }
+
+  public updateUser(newUserData: Partial<UserDTO>): Observable<boolean> {
+    const url = `${environment.apiUrl}/users/${this.currentUser?.userId}`;
+
+    const newUser: User = {
+      ...this._currentUser,
+      ...newUserData,
+    } as User;
+
+    const userUpdateObservable = this._http.patch(
+      url,
+      newUser,
+      {
+        headers: this.getAuthHeaders(this._currentUser),
+      }
+    );
+
+    return userUpdateObservable.pipe(
+      map(res => {
+        this.currentUser = newUser;
         return true;
       })
     )

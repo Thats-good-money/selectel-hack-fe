@@ -11,6 +11,8 @@ export class NavbarComponent {
   public readonly titles: Record<string, string> = {
     '/address-needs': 'Центры крови',
     '/donations': 'Добавление донации',
+    '/my-donations': 'Мои донации',
+    '/profile': 'Профиль',
   };
 
   public get title(): string {

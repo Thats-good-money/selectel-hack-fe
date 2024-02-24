@@ -31,7 +31,6 @@ export class RegisterComponent {
       [
         Validators.required,
         Validators.email,
-        Validators.minLength(6),
       ]
     ),
     firstName: new FormControl(
