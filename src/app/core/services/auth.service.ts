@@ -51,7 +51,7 @@ export class AuthService {
    * @returns `Observable` с объектов ответа
    */
   public login(credentials: LoginRequest): Observable<Object> {
-    const url = `${environment.apiUrl}/login`;
+    const url = `${environment.apiUrl}/auth/login`;
 
     const loginObservable = this._http.post<LoginResponse>(
       url,
@@ -75,7 +75,7 @@ export class AuthService {
    * @returns `Observable` с объектов ответа
    */
   public register(credentials: RegisterRequest): Observable<Object> {
-    const url = `${environment.apiUrl}/registration`;
+    const url = `${environment.apiUrl}/auth/registration`;
     const registerObservable = this._http.post<RegisterResponse>(url, credentials);
 
     return registerObservable.pipe(
