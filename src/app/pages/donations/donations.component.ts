@@ -25,7 +25,6 @@ import {DonationsService} from "@core/services/donations.service";
 
 export class DonationsComponent implements OnInit{
 
-
   constructor(
     private citiesService: CitiesService,
     private stationsService: StationsService,
@@ -33,10 +32,7 @@ export class DonationsComponent implements OnInit{
     private authService: AuthService,
     private donatService: DonationsService,
     private router: Router
-  ) {
-
-
-  }
+  ) {}
 
 
   readonly bloodTypeForm = new FormGroup(({
@@ -156,8 +152,6 @@ export class DonationsComponent implements OnInit{
     );
   }
 
-
-
   submitForm() {
     const submissionData = {
       userId: this.authService.currentUser?.userId,
@@ -218,6 +212,22 @@ export class DonationsComponent implements OnInit{
 
     // @ts-ignore
     return `${customDate.year}-${formattedMonth}-${formattedDay}`
+  }
+
+  // Заготовка для метода
+  private _fillFormWithBloodStationFromPreviousUrl(): void {
+    // const rawBloodStationId = this._route.snapshot.queryParamMap.get('bloodStationId');
+    // if (!rawBloodStationId) {
+    //   return;
+    // }
+    //
+    // const bloodStationId = parseInt(rawBloodStationId);
+    // for (const bloodStation of this.stations) {
+    //   if (bloodStation.bloodStationId === bloodStationId) {
+    //     this.cityControl.setValue(bloodStation.cityDto.title);
+    //     this.stationControl.setValue(bloodStation.title);
+    //   }
+    // }
   }
 
   // Заготовка для метода

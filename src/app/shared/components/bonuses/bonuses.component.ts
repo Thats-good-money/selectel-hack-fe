@@ -92,7 +92,7 @@ export class BonusesComponent  implements OnInit{
     })
   }
 
-  promocode = this.newBonusItem.promocode === null ? 'А фиг вам' : this.newBonusItem.promocode
+  promocode = this.newBonusItem.promocode === null ? 'Нет промокода' : this.newBonusItem.promocode
 
   copyText(text: string | null){
     if (typeof text === "string") {

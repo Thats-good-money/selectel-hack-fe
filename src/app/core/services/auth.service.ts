@@ -96,15 +96,7 @@ export class AuthService {
   public logout(): Observable<Object> {
     localStorage.removeItem(this.USER_STORAGE_KEY);
 
-    const url = `${environment.apiUrl}/auth/logout`;
-
-    return this._http.post(
-      url,
-      null,
-      {
-        headers: this.getAuthHeaders(this.currentUser)
-      },
-    );
+    return of({});
   }
 
   public authViaToken(): Observable<boolean> {

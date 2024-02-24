@@ -3,10 +3,10 @@
   tuiSurface="elevated"
 >
   <h3 class="tui-text_h5">
-    {{ addressNeed.bloodStation.title }}
+    {{ addressNeed.title }}
   </h3>
   <p>
-    {{ addressNeed.bloodStation.address }}
+    {{ addressNeed.address }}
   </p>
   <div class="grid grid-cols-4 gap-1.5">
     <tui-island
@@ -48,6 +48,7 @@
     tuiButton
     type="button"
     icon="tuiIconArrowUpRight"
+    (click)="enrollForDonation()"
   >
     Записаться
   </button>

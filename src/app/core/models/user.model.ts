@@ -40,3 +40,14 @@ export interface LoginResponse {
 };
 
 export type BloodType = 'O+' | 'O-' | 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-';
+
+export const BloodTypeFieldNames: Record<BloodType, string> = {
+  'O+': 'oplus',
+  'O-': 'ominus',
+  'A+': 'aplus',
+  'A-': 'aminus',
+  'B+': 'bplus',
+  'B-': 'bminus',
+  'AB+': 'abPlus',
+  'AB-': 'abMinus',
+};

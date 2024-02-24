@@ -1,4 +1,5 @@
 <div
+  *ngFor="let donation of userDonations$ | async"
   tuiCardLarge
   tuiSurface="elevated"
 >
@@ -8,7 +9,7 @@
         icon="tuiIconCalendarLarge"
         [style.color]="'var(--tui-primary)'"
       />
-      <p class="text-gray-500">16 февраля 2024</p>
+      <p class="text-gray-500">{{ donation.donateAt }}</p>
     </div>
     <div class="flex">
       <button
@@ -26,12 +27,12 @@
     </div>
   </div>
   <div>
-    <p>Городская станция переливания крови Санкт-Петербурга</p>
-    <p class="text-gray-500">Санкт-Петербург, Кронверкский пр., 49</p>
+    <p>{{ donation.bloodStation.title }}</p>
+    <p class="text-gray-500">{{ donation.bloodStation.address }}</p>
   </div>
   <div class="text-gray-500 flex flex-row gap-5">
     <img src="/assets/icons/blood.svg"/>
-    <p>Чистая кровь</p>
+    <p>{{ donation.bloodClass }}</p>
   </div>
 </div>
 

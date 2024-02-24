@@ -1,9 +1,9 @@
-<h3 class="tui-text_h3">Бонусы</h3>
+<h3 class="tui-text_h5 mt-2 mb-2">Бонусы</h3>
 
 
 <div class="container">
   <div *ngFor="let bonus of bonuses">
-      <tui-island>
+      <tui-island class="mt-4">
         <div [class.disabled-component]="bonus.taken">
 
         <img

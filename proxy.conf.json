@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://89.248.206.234:8181",
-    "secure": false
+    "target": "https://selhack.mindskills.ru/server",
+    "secure": true
   }
 }

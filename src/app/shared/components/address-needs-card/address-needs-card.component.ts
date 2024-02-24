@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AddressNeeds } from "@core/models/address-needs.model";
-import { BloodType } from "@core/models/user.model";
+import { BloodType, BloodTypeFieldNames } from "@core/models/user.model";
+import { BloodStation } from "@core/models/address-needs.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-address-needs-card',
@@ -9,20 +10,31 @@ import { BloodType } from "@core/models/user.model";
 })
 export class AddressNeedsCardComponent {
 
-  @Input() addressNeed!: AddressNeeds;
+  @Input() addressNeed!: BloodStation;
 
   public readonly bloodTypes: BloodType[] = ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'];
 
-  public checkBloodTypeNeeded(bloodType: BloodType, addressNeeds: AddressNeeds): boolean {
-    const fieldName = (
-      bloodType
-        .toLowerCase()
-        .replace('+', 'Plus')
-        .replace('-', 'Minus')
-    );
+  constructor(
+    private _router: Router,
+  ) {}
+
+
+  public checkBloodTypeNeeded(bloodType: BloodType, addressNeeds: BloodStation): boolean {
+    const fieldName = BloodTypeFieldNames[bloodType];
 
     // @ts-ignore
     return addressNeeds[fieldName] === 'need';
+  }
+
+  public enrollForDonation(): void {
+    this._router.navigate(
+      [`/plan-donation`],
+      {
+        queryParams: {
+          bloodStationId: this.addressNeed.bloodStationId,
+        },
+      },
+    );
   }
 
 }
