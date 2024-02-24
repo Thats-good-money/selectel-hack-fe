@@ -4,9 +4,9 @@ import { AuthService } from '@core/services/auth.service';
 import { PointsService } from '@core/services/points.service';
 import { User } from "@core/models/user.model";
 import { debounceTime, Observable, of } from "rxjs";
-import { AddressNeeds } from "@core/models/address-needs.model";
 import { FormControl } from "@angular/forms";
 import { AddressNeedsService } from "@core/services/address-needs.service";
+import { BloodStation } from "@core/models/address-needs.model";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,7 @@ import { AddressNeedsService } from "@core/services/address-needs.service";
 })
 export class HomeComponent implements OnInit {
 
-  public addressNeeds$: Observable<AddressNeeds[]> = of([]);
+  public addressNeeds$: Observable<BloodStation[]> = of([]);
 
   public bloodCenterSearchControl = new FormControl('');
 
@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
         this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({
           title: this.bloodCenterSearchControl.value,
         });
+
+        this.bloodCenterIndex = 0;
       });
   }
 
