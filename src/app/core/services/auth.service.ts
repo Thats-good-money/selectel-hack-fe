@@ -35,7 +35,7 @@ export class AuthService {
 
     let headers = new HttpHeaders();
     if (user?.token != undefined)
-      headers = headers.set('Authorization', user?.token);
+      headers = headers.set('Authorization', `Bearer ${user?.token}`);
 
     return headers;
   }
