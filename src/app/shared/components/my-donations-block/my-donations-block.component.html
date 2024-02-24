@@ -1,0 +1,58 @@
+
+<div class="flex justify-between items-center w-full">
+  <h1>Донации</h1>
+  <a
+    icon="tuiIconChevronRight"
+    tuiLink
+    routerLink="/my-donations"
+  >
+    подробнее
+  </a>
+</div>
+
+<div>
+  <h2 class="tui-text_h5">{{(userDonations$ | async)?.length}}</h2>
+  <div>
+    {{isHonoraryDonor$ | async}}
+  </div>
+</div>
+
+<!--<div-->
+<!--  *ngFor="let donation of userDonations$ | async"-->
+<!--  tuiCardLarge-->
+<!--  tuiSurface="elevated"-->
+<!--&gt;-->
+<!--  <div class="flex justify-between items-center">-->
+<!--    <div class="flex gap-5">-->
+<!--      <tui-icon-->
+<!--        icon="tuiIconCalendarLarge"-->
+<!--        [style.color]="'var(&#45;&#45;tui-primary)'"-->
+<!--      />-->
+<!--      <p class="text-gray-500">{{ donation.donateAt }}</p>-->
+<!--    </div>-->
+<!--    <div class="flex">-->
+<!--      <button-->
+<!--        appearance="icon"-->
+<!--        tuiIconButton-->
+<!--        icon="tuiIconEditLarge"-->
+<!--      >-->
+<!--      </button>-->
+<!--      <button-->
+<!--        appearance="icon"-->
+<!--        tuiIconButton-->
+<!--        icon="tuiIconCloseLarge"-->
+<!--      >-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <p>{{ donation.bloodStation.title }}</p>-->
+<!--    <p class="text-gray-500">{{ donation.bloodStation.address }}</p>-->
+<!--  </div>-->
+<!--  <div class="text-gray-500 flex flex-row gap-5">-->
+<!--    <img src="/src/assets/icons/blood.svg"/>-->
+<!--    <p>{{ donation.bloodClass }}</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+
