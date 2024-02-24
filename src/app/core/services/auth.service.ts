@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from '@core/models/user.model';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, UserDTO } from '@core/models/user.model';
 import { environment } from 'environments/environment';
 import { Observable, map, of, tap, throwError } from 'rxjs';
 
@@ -126,6 +126,30 @@ export class AuthService {
     return checkTokenObservable.pipe(
       map(res => {
         this.currentUser = user;
+        return true;
+      })
+    )
+  }
+
+  public updateUser(newUserData: Partial<UserDTO>): Observable<boolean> {
+    const url = `${environment.apiUrl}/users/${this.currentUser?.userId}`;
+
+    const newUser: User = {
+      ...this._currentUser,
+      ...newUserData,
+    } as User;
+
+    const userUpdateObservable = this._http.patch(
+      url,
+      newUser,
+      {
+        headers: this.getAuthHeaders(this._currentUser),
+      }
+    );
+
+    return userUpdateObservable.pipe(
+      map(res => {
+        this.currentUser = newUser;
         return true;
       })
     )

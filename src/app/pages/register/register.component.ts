@@ -31,7 +31,6 @@ export class RegisterComponent {
       [
         Validators.required,
         Validators.email,
-        Validators.minLength(6),
       ]
     ),
     firstName: new FormControl(
@@ -39,14 +38,13 @@ export class RegisterComponent {
       [
         Validators.required,
         Validators.pattern(/^[a-zA-Zа-яА-Я]+$/),
-        Validators.minLength(8),
       ]
     ),
     password: new FormControl(
       '',
       [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(6),
       ]
     )
   });

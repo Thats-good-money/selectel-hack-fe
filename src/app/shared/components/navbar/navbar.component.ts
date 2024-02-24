@@ -12,6 +12,7 @@ export class NavbarComponent {
     '/address-needs': 'Центры крови',
     '/donations': 'Добавление донации',
     '/my-donations': 'Мои донации',
+    '/profile': 'Профиль',
   };
 
   public get title(): string {

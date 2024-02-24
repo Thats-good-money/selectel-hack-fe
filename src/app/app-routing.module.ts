@@ -8,6 +8,7 @@ import { AddressNeedsComponent } from "@pages/address-needs/address-needs.compon
 import {PlanDonationComponent} from "@pages/plan-donation/plan-donation.component";
 import {DonationsComponent} from "@pages/donations/donations.component";
 import { MyDonationsComponent } from "@pages/my-donations/my-donations.component";
+import { ProfileComponent } from "@pages/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'my-donations',
     component: MyDonationsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [authGuard],
   },
 ];

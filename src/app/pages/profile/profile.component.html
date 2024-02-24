@@ -1,0 +1,103 @@
+<div
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <form [formGroup]="profileForm">
+    <p>
+      <tui-input
+        formControlName="firstName"
+        tuiTextfieldSize="l"
+      >
+        Имя
+        <input
+          tuiTextfield
+          type="text"
+          required
+        />
+      </tui-input>
+      <tui-error
+        class=""
+        formControlName="firstName"
+        [error]="[] | tuiFieldError | async"
+      >
+      </tui-error>
+    </p>
+    <p class="mt-3">
+      <label>
+        <tui-select
+          formControlName="bloodType"
+        >
+          Группа крови
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="bloodTypes"
+          />
+        </tui-select>
+      </label>
+    </p>
+    <p class="mt-3">
+      <label>
+        <tui-combo-box
+          formControlName="city"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Город
+
+          <tui-data-list-wrapper
+            emptyContent="Ничего не найдено"
+            *tuiDataList
+            [items]="cities"
+          >
+          </tui-data-list-wrapper>
+        </tui-combo-box>
+      </label>
+    </p>
+  </form>
+
+  <div>
+    <button
+      class="w-full"
+      tuiButton
+      icon="tuiIconSaveLarge"
+      (click)="updateProfile()"
+    >
+      Сохранить
+    </button>
+    <button
+      class="w-full mt-3"
+      tuiButton
+      appearance="outline"
+      (click)="isChangingPassword = true"
+    >
+      Обновить пароль
+    </button>
+  </div>
+</div>
+
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{label: 'Изменить пароль', size: 's'}"
+  [(tuiDialog)]="isChangingPassword"
+>
+  <tui-input
+    [formControl]="newPasswordControl"
+    tuiAutoFocus
+  >
+    Новый пароль
+  </tui-input>
+  <tui-error
+    class=""
+    [formControl]="newPasswordControl"
+    [error]="[] | tuiFieldError | async"
+  >
+  </tui-error>
+  <p>
+    <button
+      class="w-full mt-3"
+      tuiButton
+      (click)="updatePassword(); observer.complete()"
+    >
+      Обновить
+    </button>
+  </p>
+</ng-template>

@@ -56,7 +56,8 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
 
 import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
 import { AddressNeedsCardComponent } from './shared/components/address-needs-card/address-needs-card.component';
-import { MyDonationsComponent } from './pages/my-donations/my-donations.component'
+import { MyDonationsComponent } from './pages/my-donations/my-donations.component';
+import { ProfileComponent } from './pages/profile/profile.component'
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { MyDonationsComponent } from './pages/my-donations/my-donations.componen
     AddressNeedsComponent,
     PlanDonationComponent,
     AddressNeedsCardComponent,
-    MyDonationsComponent
+    MyDonationsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
