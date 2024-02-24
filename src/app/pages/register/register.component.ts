@@ -38,6 +38,7 @@ export class RegisterComponent {
       [
         Validators.required,
         Validators.pattern(/^[a-zA-Zа-яА-Я]+$/),
+        Validators.minLength(2),
       ]
     ),
     password: new FormControl(

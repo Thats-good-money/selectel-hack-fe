@@ -71,7 +71,6 @@ export class DonationsComponent implements OnInit{
       this.removeFile()
     })
 
-
     this.citiesService.getCities(`${environment.externalApiUrl}/cities`).subscribe((response: CitiesResponse) => {
       this.simpleCities = response.results.map(city => city.title)
       this.extendedCities = response.results.map(city => ({name: city.title, id: city.id}))
