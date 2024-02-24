@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { PointsService } from '@core/services/points.service';
@@ -15,6 +15,7 @@ import { AddressNeedsService } from "@core/services/address-needs.service";
 })
 export class HomeComponent implements OnInit {
 
+
   public addressNeeds$: Observable<AddressNeeds[]> = of([]);
 
   public bloodCenterSearchControl = new FormControl('');
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
     private _authService: AuthService,
     private _router: Router,
     private _addressNeedsService: AddressNeedsService,
-  ) { }
+  ) {
+  }
 
   public ngOnInit(): void {
     this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
