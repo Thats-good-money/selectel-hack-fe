@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Location } from "@angular/common";
 
 @Component({
@@ -13,9 +13,11 @@ export class AppComponent {
     return !urlsWithoutNavbar.includes(this._location.path());
   }
 
+
   constructor(
     private _location: Location,
   ) {
+
   }
 
 }

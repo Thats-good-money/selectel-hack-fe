@@ -7,8 +7,9 @@ import { RegisterComponent } from '@pages/register/register.component';
 import { AddressNeedsComponent } from "@pages/address-needs/address-needs.component";
 import {DonationsComponent} from "@pages/donations/donations.component";
 import {PlanDonationComponent} from "@pages/plan-donation/plan-donation.component";
-import { MyDonationsComponent } from "@pages/my-donations/my-donations.component";
-import { ProfileComponent } from "@pages/profile/profile.component";
+import {MyDonationsComponent} from "@pages/my-donations/my-donations.component";
+import {ProfileComponent} from "@pages/profile/profile.component";
+
 
 const routes: Routes = [
   {
@@ -22,32 +23,32 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'donations',
     component: DonationsComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'address-needs',
     component: AddressNeedsComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'plan-donation',
     component: PlanDonationComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'my-donations',
     component: MyDonationsComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
 ];
 

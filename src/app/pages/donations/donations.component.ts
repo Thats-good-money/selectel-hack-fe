@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {TuiDay} from "@taiga-ui/cdk";
 import {finalize, map, Observable, of, Subject, switchMap, timer} from "rxjs";
@@ -11,7 +11,10 @@ import {StationsResponse} from "@core/models/station.model";
 import {SimpleStation} from "@core/models/simpleStation.model";
 import {SimpleCity} from "@core/models/simpleCity.model";
 import {environment} from "../../../environments/environment";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "@core/services/auth.service";
+import {DonationsService} from "@core/services/donations.service";
+
 
 @Component({
   selector: 'app-donations',
@@ -26,7 +29,10 @@ export class DonationsComponent implements OnInit{
     private citiesService: CitiesService,
     private stationsService: StationsService,
     private _route: ActivatedRoute,
-  ) { }
+    private authService: AuthService,
+    private donatService: DonationsService,
+    private router: Router
+  ) {}
 
 
   readonly bloodTypeForm = new FormGroup(({
@@ -80,7 +86,7 @@ export class DonationsComponent implements OnInit{
     })
 
     this.stationsService.getStations(`${environment.externalApiUrl}/blood_stations`).subscribe((response: StationsResponse) => {
-      this.stations = response.results.map(station => ({name: station.title, city_id: station.city_id}))
+      this.stations = response.results.map(station => ({id: station.id, name: station.title, city_id: station.city_id}))
     })
 
     this.cityControl.valueChanges.subscribe(selectedCity => {
@@ -90,6 +96,7 @@ export class DonationsComponent implements OnInit{
 
     this._fillFormWithBloodStationFromPreviousUrl();
   }
+
 
   filterStationsByCity(city: string){
     if (this.getCityByName(city) !== undefined){
@@ -147,17 +154,80 @@ export class DonationsComponent implements OnInit{
 
   submitForm() {
     const submissionData = {
-      bloodType: this.bloodTypeForm.value.bloodType,
-      donationDate: this.donationDateForm.value.donationDate,
-      donationType: this.donationTypeForm.value.donationType,
-      place: this.placeForm.value.place,
-      city: this.cityControl.value,
-      station: this.stationControl.value,
-      certificate: this.certificateForm.value.certificate,
-      file: this.control.value ? this.control.value.name : 'No file selected'
+      userId: this.authService.currentUser?.userId,
+      bloodStationId: this.stations.find(s => s.name === this.stationControl.value),
+      firstName: this.authService.currentUser?.firstName,
+      lastName: '',
+      middleName: '',
+      donateAt: this.formatDate(this.donationDateForm.value.donationDate),
+      bloodClass: this.bloodTypeForm.value.bloodType,
+      paymentType: this.donationTypeForm.value.donationType === 'donationType1' ? 'free' : 'payed',
+      isOut: this.placeForm.value.place !== 'place1',
+      volume: 30,
+      paymentCost: 300,
+      onModerationDate: this.formatDate(new TuiDay(this.getCurrentDate().year, this.getCurrentDate().month_index, this.getCurrentDate().day)),
+      withImage: this.certificateForm.value.certificate === 'cert1',
+      createdUsingOcr: true,
+      imageId: this.control.value ? this.control.value.name : 'No file selected'
     };
 
-    console.log(submissionData);
+
+
+    // const formData = new FormData()
+    // for (const key in submissionData) {
+    //
+    //   if (submissionData.hasOwnProperty(key)) {
+    //     // @ts-ignore
+    //     const value = typeof submissionData[key] === 'boolean' ? submissionData[key].toString() : submissionData[key];
+    //     formData.append(key, value);
+    //   }
+    // }
+    //
+    // this.donatService.sendData(formData, `${environment.customApi}/donations`).subscribe({
+    //   next: (response)  => {
+    //     this.router.navigate(['/'])
+    //   },
+    //   error: (error) => {
+    //     console.error("Error", error)
+    //   }
+    // })
+  }
+
+  getCurrentDate(){
+    const now = new Date()
+    const day = now.getDate(); // Получаем текущее число
+    const month_index = now.getMonth(); // Получаем индекс текущего месяца (0-11)
+    const year = now.getFullYear();
+
+    return { day, month_index, year };
+  }
+
+  formatDate(customDate: TuiDay | undefined | null):string{
+    // @ts-ignore
+    const month = customDate.month + 1
+
+    // @ts-ignore
+    const formattedDay = customDate.day.toString().padStart(2, '0')
+    const formattedMonth = month.toString().padStart(2, '0')
+
+    // @ts-ignore
+    return `${customDate.year}-${formattedMonth}-${formattedDay}`
+  }
+
+  // Заготовка для метода
+  private _fillFormWithBloodStationFromPreviousUrl(): void {
+    // const rawBloodStationId = this._route.snapshot.queryParamMap.get('bloodStationId');
+    // if (!rawBloodStationId) {
+    //   return;
+    // }
+    //
+    // const bloodStationId = parseInt(rawBloodStationId);
+    // for (const bloodStation of this.stations) {
+    //   if (bloodStation.bloodStationId === bloodStationId) {
+    //     this.cityControl.setValue(bloodStation.cityDto.title);
+    //     this.stationControl.setValue(bloodStation.title);
+    //   }
+    // }
   }
 
   // Заготовка для метода
