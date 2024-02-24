@@ -3,15 +3,9 @@
 
 <div class="container">
   <div *ngFor="let bonus of bonuses">
-      <a
-        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        class="mt-4"
-        rel="noreferrer"
-        size="l"
-        target="_blank"
-        tuiIsland
-        [hoverable]="true"
-      >
+      <tui-island>
+        <div [class.disabled-component]="bonus.taken">
+
         <img
           alt="bonus_img"
           class="image"
@@ -30,7 +24,23 @@
           </p>
         </div>
 
-      </a>
+        <button
+          *ngIf="!bonus.taken"
+          size="l"
+          tuiButton
+          type="button"
+          (click)="claimBonus(bonus, 'Бонус собран')"
+          [disabled]="bonus.taken"
+          >
+          Собрать
+
+        </button>
+
+        </div>
+
+        <h4 *ngIf="bonus.taken">Ваш промокод: PISKA228</h4>
+
+      </tui-island>
 
 </div>
 </div>

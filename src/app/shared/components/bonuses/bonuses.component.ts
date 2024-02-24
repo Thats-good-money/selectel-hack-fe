@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {BonusesService} from "@core/services/bonuses.service";
 import {environment} from "../../../../environments/environment";
 import {BonusResponse} from "@core/models/bonus.model";
 import {BonusItem} from "@core/models/bonusItem.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {tuiAvatarOptionsProvider} from "@taiga-ui/kit";
+import {TuiAlertService} from "@taiga-ui/core";
+import {gray} from "d3-color";
 
 @Component({
   selector: 'app-bonuses',
@@ -19,7 +21,10 @@ import {tuiAvatarOptionsProvider} from "@taiga-ui/kit";
   ]
 })
 export class BonusesComponent  implements OnInit{
-  constructor(private bonusService: BonusesService) {
+  constructor(
+    @Inject(TuiAlertService)
+    private readonly alerts: TuiAlertService,
+    private bonusService: BonusesService) {
   }
 
   bonuses: BonusItem[] = []
@@ -39,6 +44,13 @@ export class BonusesComponent  implements OnInit{
       month: 'long',
       year: 'numeric'
     })
+  }
+
+  claimBonus(bonus: BonusItem, message: string){
+    bonus.taken = true
+    this.alerts.open(message).subscribe()
+    this.bonuses.reverse().pop()
+    this.bonuses.push(bonus)
   }
 
 }
