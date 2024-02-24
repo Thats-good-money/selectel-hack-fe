@@ -11,6 +11,7 @@ import {StationsResponse} from "@core/models/station.model";
 import {SimpleStation} from "@core/models/simpleStation.model";
 import {SimpleCity} from "@core/models/simpleCity.model";
 import {environment} from "../../../environments/environment";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-donations',
@@ -21,9 +22,11 @@ import {environment} from "../../../environments/environment";
 
 export class DonationsComponent implements OnInit{
 
-  constructor(private citiesService: CitiesService, private stationsService: StationsService) {
-
-  }
+  constructor(
+    private citiesService: CitiesService,
+    private stationsService: StationsService,
+    private _route: ActivatedRoute,
+  ) { }
 
 
   readonly bloodTypeForm = new FormGroup(({
@@ -86,7 +89,7 @@ export class DonationsComponent implements OnInit{
       this.stationControl.reset()
     })
 
-
+    this._fillFormWithBloodStationFromPreviousUrl();
   }
 
   filterStationsByCity(city: string){
@@ -143,8 +146,6 @@ export class DonationsComponent implements OnInit{
     );
   }
 
-
-
   submitForm() {
     const submissionData = {
       bloodType: this.bloodTypeForm.value.bloodType,
@@ -158,6 +159,22 @@ export class DonationsComponent implements OnInit{
     };
 
     console.log(submissionData);
+  }
+
+  // Заготовка для метода
+  private _fillFormWithBloodStationFromPreviousUrl(): void {
+    // const rawBloodStationId = this._route.snapshot.queryParamMap.get('bloodStationId');
+    // if (!rawBloodStationId) {
+    //   return;
+    // }
+    //
+    // const bloodStationId = parseInt(rawBloodStationId);
+    // for (const bloodStation of this.stations) {
+    //   if (bloodStation.bloodStationId === bloodStationId) {
+    //     this.cityControl.setValue(bloodStation.cityDto.title);
+    //     this.stationControl.setValue(bloodStation.title);
+    //   }
+    // }
   }
 
 }

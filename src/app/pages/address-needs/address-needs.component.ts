@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { BloodType } from "@core/models/user.model";
 import { debounceTime, map, Observable, of } from "rxjs";
-import { AddressNeedsService } from '@core/services/address-needs.service';
+import { BloodStationsService } from '@core/services/blood-stations.service';
 import { GeographyService } from "@core/services/geography.service";
 import { AuthService } from "@core/services/auth.service";
 import { BloodStation } from "@core/models/address-needs.model";
@@ -26,7 +26,7 @@ export class AddressNeedsComponent implements OnInit {
   public cities: string[] = [];
 
   constructor(
-    private _addressNeedsService: AddressNeedsService,
+    private _addressNeedsService: BloodStationsService,
     private _geographyService: GeographyService,
     private _authService: AuthService,
   ) {}
@@ -46,7 +46,7 @@ export class AddressNeedsComponent implements OnInit {
         debounceTime(1000),
       )
       .subscribe(() => {
-        this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList(
+        this.addressNeeds$ = this._addressNeedsService.getBloodStationsList(
           this.needsFilterForm.value
         );
       });
@@ -68,7 +68,7 @@ export class AddressNeedsComponent implements OnInit {
     }
 
     if (!formChanged)
-      this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
+      this.addressNeeds$ = this._addressNeedsService.getBloodStationsList({});
   }
 
 }

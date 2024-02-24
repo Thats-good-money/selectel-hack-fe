@@ -4,7 +4,7 @@ import { City } from "@core/models/geography.model";
 export type Need = 'need' | 'no_need' | null;
 
 export interface BloodStation {
-  id: number;
+  bloodStationId: number;
   title: string;
   address: string;
   cityDto: City;
@@ -18,7 +18,7 @@ export interface BloodStation {
   abMinus: Need,
 }
 
-export interface AddressNeedsFilters {
+export interface BloodStationsFilters {
   bloodType?: BloodType | null;
   city?: string | null;
   title?: string | null;

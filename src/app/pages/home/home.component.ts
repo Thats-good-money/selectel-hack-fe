@@ -5,7 +5,7 @@ import { PointsService } from '@core/services/points.service';
 import { User } from "@core/models/user.model";
 import { debounceTime, Observable, of } from "rxjs";
 import { FormControl } from "@angular/forms";
-import { AddressNeedsService } from "@core/services/address-needs.service";
+import { BloodStationsService } from "@core/services/blood-stations.service";
 import { BloodStation } from "@core/models/address-needs.model";
 
 @Component({
@@ -28,18 +28,18 @@ export class HomeComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _addressNeedsService: AddressNeedsService,
+    private _addressNeedsService: BloodStationsService,
   ) { }
 
   public ngOnInit(): void {
-    this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({});
+    this.addressNeeds$ = this._addressNeedsService.getBloodStationsList({});
 
     this.bloodCenterSearchControl.valueChanges
       .pipe(
         debounceTime(1000),
       )
       .subscribe(() => {
-        this.addressNeeds$ = this._addressNeedsService.getAddressNeedsList({
+        this.addressNeeds$ = this._addressNeedsService.getBloodStationsList({
           title: this.bloodCenterSearchControl.value,
         });
 

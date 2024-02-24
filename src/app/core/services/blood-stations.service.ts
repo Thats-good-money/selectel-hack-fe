@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddressNeedsFilters, BloodStation } from "@core/models/address-needs.model";
+import { BloodStationsFilters, BloodStation } from "@core/models/address-needs.model";
 import { environment } from 'environments/environment';
 import { map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -9,14 +9,14 @@ import { AuthService } from "@core/services/auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AddressNeedsService {
+export class BloodStationsService {
 
   constructor(
     private _http: HttpClient,
     private _authService: AuthService,
   ) { }
 
-  public getAddressNeedsList(filters: AddressNeedsFilters): Observable<BloodStation[]> {
+  public getBloodStationsList(filters: BloodStationsFilters): Observable<BloodStation[]> {
     const url = `${environment.apiUrl}/blood_stations`;
 
     const headers = this._authService.getAuthHeaders();
