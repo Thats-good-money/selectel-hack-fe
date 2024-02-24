@@ -80,7 +80,7 @@ export class DonationsComponent implements OnInit{
     })
 
     this.stationsService.getStations(`${environment.externalApiUrl}/blood_stations`).subscribe((response: StationsResponse) => {
-      this.stations = response.results.map(station => ({name: station.title, city_id: station.city_id}))
+      this.stations = response.results.map(station => ({id: station.id, name: station.title, city_id: station.city_id}))
     })
 
     this.cityControl.valueChanges.subscribe(selectedCity => {
