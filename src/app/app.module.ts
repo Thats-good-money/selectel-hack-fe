@@ -56,8 +56,9 @@ import { PlanDonationComponent } from './pages/plan-donation/plan-donation.compo
 import {AddressNeedsCardComponent} from "@shared/components/address-needs-card/address-needs-card.component";
 import { BonusesComponent } from './shared/components/bonuses/bonuses.component';
 import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
-import { MyDonationsComponent } from './pages/my-donations/my-donations.component';
-import { ProfileComponent } from './pages/profile/profile.component'
+import {MyDonationsComponent} from "@pages/my-donations/my-donations.component";
+import {ProfileComponent} from "@pages/profile/profile.component";
+
 
 
 @NgModule({
