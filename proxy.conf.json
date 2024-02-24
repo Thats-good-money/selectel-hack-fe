@@ -1,6 +1,10 @@
 {
   "/api": {
-    "target": "https://selhack.mindskills.ru/server",
-    "secure": true
+    "target": "https://selhack.mindskills.ru",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/server/api"
+    }
   }
 }
