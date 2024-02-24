@@ -30,12 +30,10 @@ export class HomeComponent implements OnInit {
     private _authService: AuthService,
     private _router: Router,
 
-    private _addressNeedsService: AddressNeedsService,
+    private _addressNeedsService: BloodStationsService,
   ) {
   }
 
-    private _addressNeedsService: BloodStationsService,
-  ) { }
 
   public ngOnInit(): void {
     this.addressNeeds$ = this._addressNeedsService.getBloodStationsList({});

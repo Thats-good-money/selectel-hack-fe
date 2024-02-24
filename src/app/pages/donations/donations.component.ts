@@ -230,20 +230,5 @@ export class DonationsComponent implements OnInit{
     // }
   }
 
-  // Заготовка для метода
-  private _fillFormWithBloodStationFromPreviousUrl(): void {
-    // const rawBloodStationId = this._route.snapshot.queryParamMap.get('bloodStationId');
-    // if (!rawBloodStationId) {
-    //   return;
-    // }
-    //
-    // const bloodStationId = parseInt(rawBloodStationId);
-    // for (const bloodStation of this.stations) {
-    //   if (bloodStation.bloodStationId === bloodStationId) {
-    //     this.cityControl.setValue(bloodStation.cityDto.title);
-    //     this.stationControl.setValue(bloodStation.title);
-    //   }
-    // }
-  }
 
 }
