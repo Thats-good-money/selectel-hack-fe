@@ -49,7 +49,7 @@ export class BonusesComponent  implements OnInit{
   claimBonus(bonus: BonusItem, message: string){
     bonus.taken = true
     this.alerts.open(message).subscribe()
-    this.bonuses.reverse().pop()
+    this.bonuses.splice(this.bonuses.indexOf(bonus), 1)
     this.bonuses.push(bonus)
   }
 
