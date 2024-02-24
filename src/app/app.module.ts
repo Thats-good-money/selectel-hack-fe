@@ -31,7 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiAvatarModule,
   TuiCarouselModule,
-  TuiIslandModule, TuiMarkerIconModule, TuiPaginationModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiPaginationModule, TuiRatingModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
 import {
@@ -56,6 +56,7 @@ import { AddressNeedsComponent } from './pages/address-needs/address-needs.compo
 import { PlanDonationComponent } from './pages/plan-donation/plan-donation.component';
 import {AddressNeedsCardComponent} from "@shared/components/address-needs-card/address-needs-card.component";
 import { BonusesComponent } from './shared/components/bonuses/bonuses.component';
+import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
 
 @NgModule({
   declarations: [
@@ -118,7 +119,9 @@ import { BonusesComponent } from './shared/components/bonuses/bonuses.component'
     TuiAvatarModule,
     TuiHintModule,
     TuiButtonModule,
-    TuiMarkerIconModule
+    TuiMarkerIconModule,
+    TuiSheetDialogModule,
+    TuiRatingModule,
   ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

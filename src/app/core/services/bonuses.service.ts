@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {BonusResponse} from "@core/models/bonus.model";
+import {BonusResponse, ExactBonusResponse} from "@core/models/bonus.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,8 @@ export class BonusesService {
     return this.http.get<BonusResponse>(url)
   }
 
-  
+  getDetails(url: string): Observable<ExactBonusResponse>{
+    return this.http.get<ExactBonusResponse>(url)
+  }
 
 }
